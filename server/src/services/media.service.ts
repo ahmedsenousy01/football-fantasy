@@ -84,17 +84,20 @@ class MediaStorageService {
 
     public async generateProfilePictureUrl(
         id: string
-    ): Promise<{ status: boolean; imageUrl: string }> {
+    ): Promise<{ status: boolean; imageUrl: string | null }> {
         const user = await UserService.GetUser(id);
-        const profilePicture = user?.profilePicture || undefined;
+        const profilePicture = user?.profilePicture;
+        let imageUrl = null;
 
-        const s3GetCommand = new GetObjectCommand({
-            Bucket: config.upload.aws_s3.bucketName,
-            Key: profilePicture,
-        });
-        const imageUrl = await getSignedUrl(this.s3, s3GetCommand, {
-            expiresIn: 3600,
-        });
+        if (profilePicture) {
+            const s3GetCommand = new GetObjectCommand({
+                Bucket: config.upload.aws_s3.bucketName,
+                Key: profilePicture,
+            });
+            imageUrl = await getSignedUrl(this.s3, s3GetCommand, {
+                expiresIn: 3600,
+            });
+        }
 
         if (imageUrl) return { status: true, imageUrl };
 

@@ -1,4 +1,4 @@
-import User from "@/interfaces/user.interfaces";
+import User from "@/interfaces/user.interface";
 import UserModel from "@/models/User";
 import JWTService from "@/services/jwt.service";
 import config from "@/core/config";
@@ -13,7 +13,11 @@ class UserService {
     }
 
     public async GetUser(id: string): Promise<User | null> {
-        return await this.model.findById(id).exec();
+        return await this.model
+            .findById(id)
+            .populate("accountLeague", "-_id name flag logo")
+            .populate("teams", "-_id")
+            .exec();
     }
 
     public async GetUserByEmail(email: string): Promise<User | null> {
@@ -92,7 +96,6 @@ class UserService {
         };
     }
 
-    // TODO: implement a mailing service using nodemailer and send the code to the user's email address
     public async requestVerificationCode(
         id: string
     ): Promise<{ status: boolean; message: string }> {

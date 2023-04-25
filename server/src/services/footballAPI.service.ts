@@ -15,6 +15,18 @@ class FootballService {
             }
         ).then((response) => response.json());
     }
+
+    public async getLeague(leagueId: string, season: string = "2022") {
+        return fetch(
+            `${this.apiURL}/leagues?id=${leagueId}&season=${season}`,
+            {
+                method: "GET",
+                headers: {
+                    "x-apisports-key": this.apiKey,
+                },
+            }
+        ).then((response) => response.json());
+    }
 }
 
 export default new FootballService();

@@ -1,5 +1,5 @@
-import { Schema, model } from "mongoose";
-import UserInterface from "@/interfaces/user.interfaces";
+import { Schema, Types, model } from "mongoose";
+import UserInterface from "@/interfaces/user.interface";
 
 const schema = new Schema({
     firstName: {
@@ -22,9 +22,13 @@ const schema = new Schema({
         type: String,
         default: null,
     },
+    role: {
+        type: String,
+        enum: ["user", "admin"],
+        default: "user",
+    },
     isVerified: {
         type: Boolean,
-        required: true,
         default: false,
     },
     verificationCode: {
@@ -32,6 +36,20 @@ const schema = new Schema({
         min: 6,
         max: 6,
         default: null,
+    },
+    budget: {
+        type: Number,
+        default: 100000,
+    },
+    accountLeague: {
+        type: Types.ObjectId,
+        ref: "league",
+        required: true,
+    },
+    teams: {
+        type: [Types.ObjectId],
+        ref: "team",
+        default: [],
     },
 });
 
