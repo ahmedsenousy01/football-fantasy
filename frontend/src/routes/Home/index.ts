@@ -1,1 +1,1 @@
-export {default as Home} from "./Home.container";
+export { default as Home } from '@/routes/Home/Home.container';
