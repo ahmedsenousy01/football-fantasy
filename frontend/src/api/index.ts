@@ -1,43 +1,53 @@
 import axios, { AxiosRequestHeaders } from 'axios';
-export const apiBase = "http://localhost:5000/api/";
-const server = axios.create({
-    baseURL: apiBase
-})
+import {getAuthHeader} from "../utils/auth/authorization";
 
-export async function get(path:string, additionalHeaders?:AxiosRequestHeaders){
-  return server.get(
-    path,
-    {
-      headers: additionalHeaders
-    }
-  );
-}
+export default class api {
+  static readonly  baseUrl = "https://football-fantasy-dev.onrender.com/api/";
+  static readonly server = axios.create({
+    baseURL: api.baseUrl
+  })
 
-export async function post(path:string, body:any, additionalHeaders?:AxiosRequestHeaders){
-  return server.post(
-    path,
-    body,
-    {
-      headers: additionalHeaders
-    }
-  )
-}
+  static async get(path:string, additionalHeaders?:AxiosRequestHeaders) {
+    return api.server.get(
+      path,
+      {
+        headers: {
+          ...getAuthHeader(),
+          ...additionalHeaders
+        }
+      }
+    );
+  }
 
-export async function put(path:string, body:any, additionalHeaders?:AxiosRequestHeaders){
-  return server.put(
-    path,
-    body,
-    {
-      headers: additionalHeaders
-    }
-  )
-}
+  static async post(path:string, body:any, additionalHeaders?:AxiosRequestHeaders){
+    return api.server.post(
+      path,
+      body,
+      {
+        ...getAuthHeader(),
+        headers: additionalHeaders
+      }
+    )
+  }
 
-export async function del(path:string, additionalHeaders?:AxiosRequestHeaders){
-  return server.delete(
-    path,
-    {
-      headers: additionalHeaders
-    }
-  )
+  static async put(path:string, body:any, additionalHeaders?:AxiosRequestHeaders){
+    return api.server.put(
+      path,
+      body,
+      {
+        ...getAuthHeader(),
+        headers: additionalHeaders
+      }
+    )
+  }
+
+  static async del(path:string, additionalHeaders?:AxiosRequestHeaders){
+    return api.server.delete(
+      path,
+      {
+        ...getAuthHeader(),
+        headers: additionalHeaders
+      }
+    )
+  }
 }

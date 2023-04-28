@@ -1,7 +1,7 @@
 *{
   color: inherit;
   transition-property: color, background-color;
-  transition-duration: 0.2s;
+  transition-duration: 0.1s;
 }
 
 .App{
@@ -13,6 +13,7 @@
   --text-color-main: #fff;
   --text-color-muted: #aaa;
   --text-color-button: #fff;
+  --text-color-input: #000;
 
   /* BTN */
   --btn-color-primary: #1a1a1a;
@@ -25,7 +26,9 @@
 
   /* TEXT */
   --text-color-main: #000;
+  --text-color-muted: #666;
   --text-color-button: #000;
+  --text-color-input: #000;
 
   /* BTN */
   --btn-color-primary: #ddd;
@@ -39,4 +42,8 @@
 .App .btn, .App button{
   background-color: var(--btn-color-primary);
   color: var(--text-color-button);
+}
+
+.App input{
+  color: var(--text-color-input);
 }

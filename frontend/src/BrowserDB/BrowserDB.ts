@@ -1,14 +1,17 @@
+type BrowserDBKey = "authToken"|"theme";
+
 export default class BrowserDB{
-  static set(key:string, value:any){
+
+  static set(key:BrowserDBKey, value:any){
     localStorage.setItem(key, JSON.stringify(value));
   }
 
-  static get(key:string){
+  static get(key:BrowserDBKey){
     const storedValue = localStorage.getItem(key);
     return storedValue === null ? undefined : JSON.parse(storedValue);
   }
 
-  static delete(key:string){
+  static delete(key:BrowserDBKey){
     localStorage.removeItem(key);
   }
 }
