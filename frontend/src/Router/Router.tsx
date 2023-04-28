@@ -1,11 +1,17 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Home } from "../routes/Home";
 import {FC} from "react";
+import {Login} from "../routes/Login";
 
-const router = createBrowserRouter([{
-  path:"/",
-  element: <Home/>,
-}]);
+const router = createBrowserRouter([
+  {
+    path:"/",
+    element: <Home/>,
+  },{
+    path:"/login",
+    element: <Login/>
+  }
+]);
 
 
 const Router:FC = ()=>{

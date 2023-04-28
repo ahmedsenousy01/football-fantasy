@@ -1,4 +1,10 @@
+// noinspection JSUnusedGlobalSymbols
+
 import BrowserDB from "../../BrowserDB";
+
+export function setAuthToken(token:string){
+  BrowserDB.set("authToken", token);
+}
 
 export function getStoredAuthToken(){
   return BrowserDB.get("authToken");

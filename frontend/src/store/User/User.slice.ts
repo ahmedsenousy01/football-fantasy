@@ -1,6 +1,8 @@
-import {AnyAction, createSlice, PayloadAction, ThunkAction} from "@reduxjs/toolkit";
-import BrowserDB from "../../BrowserDB";
+// noinspection JSUnusedLocalSymbols
+
+import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../index";
+import userDetailsRequest from "../../api/requests/authentication/details";
 
 export interface UserDetails {
   firstName:string;
@@ -11,36 +13,38 @@ export interface UserDetails {
 }
 
 interface UserState {
-  token?: string;
   details?: UserDetails
 }
 
 const initialState:UserState = {
-  token: BrowserDB.get("authToken"),
   details: undefined
 };
+
+export const fetchUserDetails = createAsyncThunk("user/getDetails",
+  async (state, action) => {
+    const response = await userDetailsRequest();
+    return response.data.data;
+  });
 
 export const UserSlice = createSlice({
   name: "user",
   initialState,
   reducers:{
-    setToken: (state, {payload: token}) => {
-      state.token = token;
-    },
     setDetails: (state, {payload: details}:PayloadAction<UserDetails>) => {
       state.details = details;
     }
+  },
+  extraReducers: builder => {
+    builder
+      .addCase(fetchUserDetails.pending, (state:UserState, action) => {
+        console.log("Waiting for user details");
+    })
+      .addCase(fetchUserDetails.fulfilled, (state:UserState, action) => {
+        state.details = action.payload;
+      })
   }
 })
 
-// const userDetailsThunk = ():ThunkAction<void, RootState, unknown, AnyAction> =>
-//   async (dispatch, getState) => {
-//     const token = getState().user.token;
-//
-//   }
-
-export const {setToken, setDetails} = UserSlice.actions;
 export const selectUser = (state:RootState) => state.user;
-export const selectAuthToken = (state:RootState) => state.user.token;
 export const selectUserDetails = (state:RootState) => state.user.details;
 export default UserSlice.reducer;

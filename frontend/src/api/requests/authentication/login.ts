@@ -1,6 +1,6 @@
 import api from "../../index";
 
-interface LoginDetails{
+export interface LoginDetails{
   email:string;
   password:string;
 }
