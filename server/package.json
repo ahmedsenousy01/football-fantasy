@@ -59,6 +59,6 @@
         "@/middleware": "dist/middleware",
         "@/interfaces": "dist/interfaces",
         "@/services": "dist/services",
-        "@/uploads": "dist/uploads"
+        "@/enums": "dist/enums"
     }
 }

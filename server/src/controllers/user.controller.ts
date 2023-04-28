@@ -100,14 +100,19 @@ class UserController implements Controller {
     async getUserById(req: Request, res: Response): Promise<Response> {
         const { id } = res.locals.token;
         const user = await UserService.GetUser(id);
+        console.log(user);
         const data = {
             firstName: user?.firstName,
             lastName: user?.lastName,
             email: user?.email,
+            role: user?.role,
             isVerified: user?.isVerified,
             profilePicture: (
                 await MediaStorageService.generateProfilePictureUrl(id)
             ).imageUrl,
+            league: user?.accountLeague,
+            teams: user?.teams,
+            budget: user?.budget,
         };
         return res.status(200).json({ data });
     }
