@@ -1,24 +1,26 @@
-import { FC, useCallback } from 'react';
-import { useAppDispatch, useAppSelector } from '@/hooks/redux-hooks';
-import { themeToggle } from '@/store/Theme/Theme.action';
+import {FC, useCallback} from "react";
+import {useAppDispatch, useAppSelector} from "../../hooks/redux-hooks";
+import {selectTheme, toggle} from "../../store/Theme/Theme.slice";
 
-const Home: FC = () => {
-	const currentTheme = useAppSelector((state) => state.theme.theme);
-	const dispatch = useAppDispatch();
+interface HomeProps{
 
-	const toggleTheme = useCallback(() => {
-		dispatch(themeToggle());
-	}, [dispatch]);
+}
 
-	return (
-		<>
-			<button className="btn" onClick={toggleTheme}>
-				Change Theme
-			</button>
-			<h1>Hello World!</h1>
-			<p>current theme: {currentTheme}</p>
-		</>
-	);
-};
+const Home:FC = () => {
+  const currentTheme = useAppSelector(selectTheme);
+  const dispatch = useAppDispatch();
+
+  const toggleTheme = useCallback(() => {
+    dispatch(toggle());
+  }, [dispatch]);
+
+  return(
+    <>
+      <button className='btn' onClick={toggleTheme}>Change Theme</button>
+      <h1>Hello World!</h1>
+      <p>current theme: {currentTheme}</p>
+    </>
+  )
+}
 
 export default Home;
