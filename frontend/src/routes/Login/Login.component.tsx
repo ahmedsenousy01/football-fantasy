@@ -1,13 +1,13 @@
-import { FC, useState } from 'react';
-import Form from '@/components/Form/Form';
-import Field from '@/components/Field/Field';
-import loginRequest, {
-	LoginDetails,
-} from '@/api/requests/authentication/login';
-import { useAppDispatch } from '@/hooks/redux-hooks';
-import { useNavigate } from 'react-router-dom';
-import { fetchUserDetails } from '@/store/User/User.slice';
-import { setAuthToken } from '@/utils/auth/authorization';
+import {FC, useState} from "react";
+import Form from "@/components/Form/Form";
+import Field from "@/components/Field/Field";
+import loginRequest, { LoginDetails } from "@/api/requests/authentication/login";
+import { useAppDispatch } from "@/hooks/redux-hooks";
+import { useNavigate } from "react-router-dom";
+import { fetchUserDetails } from "@/store/User/User.slice";
+import { setAuthToken } from "@/utils/auth/authorization";
+import Button from "@/components/Button";
+import "./login.style.css"
 
 const Login: FC = () => {
 	const dispatch = useAppDispatch();

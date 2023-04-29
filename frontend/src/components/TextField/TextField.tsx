@@ -29,16 +29,12 @@ const TextField: FC<TextFieldProps> = (props) => {
 		}
 	};
 
-	return (
-		<div>
-			<label htmlFor={htmlId}>{props.label}</label>
-			<input
-				type={props.type}
-				onChange={onChange}
-				maxLength={props.maxLength}
-			/>
-		</div>
-	);
-};
+  return(
+    <div>
+      <label htmlFor={htmlId}>{props.label}</label>
+      <input type={props.type} onChange={onChange} maxLength={props.maxLength}/>
+    </div>
+  )
+}
 
 export default TextField;

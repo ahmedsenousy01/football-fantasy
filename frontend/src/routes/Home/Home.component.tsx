@@ -1,6 +1,6 @@
 import {FC, useCallback} from "react";
 import {useAppDispatch, useAppSelector} from "@/hooks/redux-hooks";
-import {selectTheme, toggle} from "@/store/Theme/Theme.slice";
+import {selectTheme, themeToggle} from "@/store/Theme/Theme.slice";
 
 interface HomeProps{
 
@@ -11,7 +11,7 @@ const Home:FC = () => {
   const dispatch = useAppDispatch();
 
   const toggleTheme = useCallback(() => {
-    dispatch(toggle());
+    dispatch(themeToggle());
   }, [dispatch]);
 
   return(

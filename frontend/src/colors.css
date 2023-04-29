@@ -1,8 +1,9 @@
-*{
-  color: inherit;
-  transition-property: color, background-color;
-  transition-duration: 0.1s;
-}
+/**{*/
+/*  color: inherit;*/
+/*  transition-property: color, background-color;*/
+/*  transition-duration: 0.1s;*/
+/*  transition-delay: 0s;*/
+/*}*/
 
 .App{
   /* BG */
@@ -15,8 +16,12 @@
   --text-color-button: #fff;
   --text-color-input: #000;
 
+  /* COLORSCHEME */
+  --my-primary-color: #646cff;
+  --my-primary-color-dark: #535bf2;
+
   /* BTN */
-  --btn-color-primary: #1a1a1a;
+  --btn-color-calm: #1a1a1a;
 }
 
 .App.light{
@@ -30,8 +35,12 @@
   --text-color-button: #000;
   --text-color-input: #000;
 
+  /* COLORSCHEME */
+  --my-primary-color: #646cff;
+  --my-primary-color-dark: #535bf2;
+
   /* BTN */
-  --btn-color-primary: #ddd;
+  --btn-color-calm: #ddd;
 }
 
 .App{
@@ -40,10 +49,14 @@
 }
 
 .App .btn, .App button{
-  background-color: var(--btn-color-primary);
+  background-color: var(--btn-color-calm);
   color: var(--text-color-button);
 }
 
 .App input{
   color: var(--text-color-input);
+}
+
+.App .muted{
+  color: var(--text-color-muted);
 }

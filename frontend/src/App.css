@@ -2,5 +2,20 @@
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
-  text-align: center;
+}
+
+.page-wrapper{
+  width: 100%;
+  height: 100%;
+}
+
+.theme-btn{
+  background: none;
+  border: none;
+  aspect-ratio: 1;
+  position: absolute;
+}
+
+.App.dark .theme-btn{
+  /*filter: invert(1);*/
 }
