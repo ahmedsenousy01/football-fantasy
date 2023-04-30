@@ -34,7 +34,7 @@ class UserController implements Controller {
 
         this.router.post(
             `${this.path}/login`,
-            validationMiddleware(UserSchemas.login),
+            // validationMiddleware(UserSchemas.login),
             catchAsyncError(this.login)
         );
 
