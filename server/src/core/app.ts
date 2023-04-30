@@ -1,12 +1,14 @@
 import express, { Application } from "express";
 import mongoose from "mongoose";
 import compression from "compression";
+import session from "express-session";
 import cors from "cors";
 import morgan from "morgan";
 import Controller from "@/utils/interfaces/controller.interface";
 import ErrorMiddleware from "@/middleware/error.middleware";
 import helmet from "helmet";
 import config from "@/core/config";
+import SecurityMiddleware from "@/middleware/security.middleware";
 
 class App {
     private readonly express: Application;
@@ -35,12 +37,19 @@ class App {
     }
 
     private initMiddleware(): void {
-        this.express.use(cors());
+        this.express.use(cors({ credentials: true }));
         this.express.use(helmet());
         this.express.use(morgan("dev"));
-        this.express.use(express.json());
+        this.express.use(express.json({ limit: "20kb" }));
+        this.express.use(
+            session({
+                secret: "random-secret",
+                cookie: { httpOnly: true, secure: true },
+            })
+        );
         this.express.use(express.urlencoded({ extended: false }));
         this.express.use(compression());
+        this.express.use("/api", SecurityMiddleware.rateLimiter);
     }
 
     private initControllers(controllers: Controller[]): void {
