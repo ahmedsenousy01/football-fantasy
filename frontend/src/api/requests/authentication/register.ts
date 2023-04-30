@@ -11,5 +11,5 @@ interface RegistrationDetails {
 export default function registerRequest(
 	registrationDetails: RegistrationDetails
 ) {
-	return api.post('users/register', registrationDetails);
+	return api.post('/users/register', registrationDetails);
 }

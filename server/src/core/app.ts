@@ -1,4 +1,4 @@
-import express, { Application } from "express";
+import express, { Application, Request, Response } from "express";
 import mongoose from "mongoose";
 import compression from "compression";
 import cors from "cors";
@@ -7,6 +7,7 @@ import Controller from "@/utils/interfaces/controller.interface";
 import ErrorMiddleware from "@/middleware/error.middleware";
 import helmet from "helmet";
 import config from "@/core/config";
+import path from "path";
 
 class App {
     private readonly express: Application;
@@ -19,6 +20,11 @@ class App {
         this.initDatabaseConnection();
         this.initMiddleware();
         this.initControllers(controllers);
+        this.express.get("/*", async (req: Request, res: Response) => {
+            return res.sendFile(
+                path.join(__dirname, "..", "..", "public", "index.html")
+            );
+        });
         this.initErrorHandling();
     }
 
@@ -40,6 +46,9 @@ class App {
         this.express.use(morgan("dev"));
         this.express.use(express.json());
         this.express.use(express.urlencoded({ extended: false }));
+        this.express.use(
+            express.static(path.join(__dirname, "..", "..", "public"))
+        );
         this.express.use(compression());
     }
 
