@@ -20,7 +20,7 @@ class App {
         this.initDatabaseConnection();
         this.initMiddleware();
         this.initControllers(controllers);
-        this.express.get("/*", async (req: Request, res: Response) => {
+        this.express.use("/*", async (req: Request, res: Response) => {
             return res.sendFile(
                 path.join(__dirname, "..", "..", "public", "index.html")
             );
@@ -42,10 +42,10 @@ class App {
 
     private initMiddleware(): void {
         this.express.use(cors());
-        // this.express.use(helmet());
+        this.express.use(helmet());
         this.express.use(morgan("dev"));
         this.express.use(express.json());
-        this.express.use(express.urlencoded({ extended: false }));
+        this.express.use(express.urlencoded({ extended: true }));
         this.express.use(
             express.static(path.join(__dirname, "..", "..", "public"))
         );
