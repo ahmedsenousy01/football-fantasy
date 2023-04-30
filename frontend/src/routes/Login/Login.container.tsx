@@ -1,5 +1,5 @@
 import {FC} from "react";
-import Login from "./Login.component";
+import Login from "@/routes/Login/Login.component";
 
 const LoginContainer:FC = () => {
 

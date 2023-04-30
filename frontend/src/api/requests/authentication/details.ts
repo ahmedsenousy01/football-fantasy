@@ -1,5 +1,5 @@
-import api from "../../index";
+import api from '@/api/index';
 
-export default async function userDetailsRequest(){
-  return api.get("users/details");
+export default async function userDetailsRequest() {
+	return api.get('users/details');
 }

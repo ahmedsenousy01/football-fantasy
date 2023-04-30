@@ -1,31 +1,29 @@
-// noinspection JSUnusedGlobalSymbols
+import BrowserDB from '@/utils/BrowserDB';
 
-import BrowserDB from "../../BrowserDB";
-
-export function setAuthToken(token:string){
-  BrowserDB.set("authToken", token);
+export function setAuthToken(token: string) {
+	BrowserDB.set('authToken', token);
 }
 
-export function getStoredAuthToken(){
-  return BrowserDB.get("authToken");
+export function getStoredAuthToken() {
+	return BrowserDB.get('authToken');
 }
 
-export function deleteAuthToken(){
-  BrowserDB.delete("authToken");
+export function deleteAuthToken() {
+	BrowserDB.delete('authToken');
 }
 
 type AuthorizationHeader = {
-  Authorization?: string;
-}
+	Authorization?: string;
+};
 
-export function getAuthHeader(token?:string):AuthorizationHeader{
-  token = token ?? getStoredAuthToken();
+export function getAuthHeader(token?: string): AuthorizationHeader {
+	token = token ?? getStoredAuthToken();
 
-  if(token === undefined){
-    return {};
-  }
+	if (token === undefined) {
+		return {};
+	}
 
-  return {
-    Authorization: "Bearer " + token
-  };
+	return {
+		Authorization: 'Bearer ' + token,
+	};
 }
