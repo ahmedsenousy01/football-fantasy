@@ -45,7 +45,6 @@ class PlayerController implements Controller {
         const { body } = req;
         const { id } = req.params;
         const player = await PlayerService.UpdatePlayer(id, body);
-        console.log(player);
         return res.status(200).json(player);
     }
 

@@ -6,5 +6,5 @@ export interface LoginDetails {
 }
 
 export default async function loginRequest(loginDetails: LoginDetails) {
-	return api.post('users/login', loginDetails);
+	return api.post('/users/login', loginDetails);
 }
