@@ -10,9 +10,10 @@
   -webkit-text-size-adjust: 100%;
 }
 
-#root, body, .App{
+:root, #root, body, .App{
   width: 100vw;
-  height: 100svh;
+  height: 100dvh;
+  max-height: 100dvh;
 
   margin: 0;
   padding: 0;
@@ -23,6 +24,7 @@ a {
   color: var(--my-primary-color);
   text-decoration: inherit;
 }
+
 a:hover {
   color: var(--my-primary-color-dark);
 }
@@ -30,7 +32,6 @@ a:hover {
 body {
   margin: 0;
   min-width: 320px;
-  min-height: 100vh;
 }
 
 .row{
@@ -66,6 +67,12 @@ h1 {
   object-fit: cover;
 }
 
+.background-cover{
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+}
+
 input{
-  border: 2px solid var(--text-color-muted);
+  border: 3px solid var(--text-color-muted);
 }

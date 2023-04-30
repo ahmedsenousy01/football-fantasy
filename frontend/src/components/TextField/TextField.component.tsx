@@ -7,7 +7,7 @@ import {
   useMemo,
 } from "react";
 import { assertDefined } from "@/utils/error/assert";
-import { FormIdContext } from "../Form/Form";
+import { FormIdContext } from "../Form/Form.component";
 import "./TextField.style.css";
 
 export interface TextFieldProps extends FieldProps {

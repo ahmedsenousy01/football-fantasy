@@ -1,4 +1,5 @@
 import "@/App.css";
+import "@/styles/form-page.css"
 import "bootstrap/dist/css/bootstrap.min.css";
 import Router from "@/components/Router";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux-hooks";
@@ -16,7 +17,7 @@ function App() {
   return (
     <div className={"App " + currentTheme}>
       <button onClick={toggleTheme} className={"theme-btn"}>
-        <img src={currentTheme == "dark" ? darkModeIcon : lightModeIcon}  alt="change theme"/>
+        <img src={currentTheme == "dark" ? darkModeIcon : lightModeIcon} height={30} alt="change theme"/>
       </button>
       <Router />
     </div>

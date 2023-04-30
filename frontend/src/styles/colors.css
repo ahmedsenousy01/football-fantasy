@@ -22,6 +22,18 @@
 
   /* BTN */
   --btn-color-calm: #1a1a1a;
+
+  /* MESSAGE */
+  --message-bg-opacity: 0.05;
+  --message-bg-color: rgba(170, 170, 170, var(--message-bg-opacity));
+  --message-solid-color: rgb(170, 170, 170);
+
+  --neutral-message-color: rgba(170, 170, 170, var(--message-bg-opacity));
+  --warning-message-color: rgba(169, 165, 16, var(--message-bg-opacity));
+
+  --success-message-solid-color: rgb(16, 175, 16);
+  --neutral-message-solid-color: rgb(170, 170, 170);
+  --warning-message-solid-color: rgb(169, 165, 16);
 }
 
 .App.light{
@@ -31,7 +43,7 @@
 
   /* TEXT */
   --text-color-main: #000;
-  --text-color-muted: #666;
+  --text-color-muted: #666666;
   --text-color-button: #000;
   --text-color-input: #000;
 
@@ -59,4 +71,20 @@
 
 .App .muted{
   color: var(--text-color-muted);
+}
+
+.App .message{
+  color: var(--message-solid-color);
+  border: 2px solid var(--message-solid-color);
+  background-color: var(--message-bg-color);
+}
+
+.App .success-message{
+  --message-bg-color: rgba(16, 175, 16, var(--message-bg-opacity));
+  --message-solid-color: rgb(13, 134, 13);
+}
+
+.App .error-message{
+  --message-bg-color: rgba(173, 19, 19, var(--message-bg-opacity));
+  --message-solid-color: rgb(166, 0, 0);
 }

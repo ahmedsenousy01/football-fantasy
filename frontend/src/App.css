@@ -13,9 +13,13 @@
   background: none;
   border: none;
   aspect-ratio: 1;
+  border-radius: 100%;
   position: absolute;
+  margin-top: 5px;
+  margin-left: 5px;
 }
 
-.App.dark .theme-btn{
-  /*filter: invert(1);*/
+.App .message{
+  padding: 10px 15px;
+  border-radius: 5px;
 }

@@ -1,0 +1,25 @@
+.form-page main{
+    background: var(--bg-color-secondary);
+    border-radius: 13px;
+    overflow: hidden;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+}
+.form-page .form-container{
+    width: 100%;
+    padding: 20px 0;
+}
+.form-page .front-img-container{
+    height: 150px;
+}
+
+@media screen and (min-width: 992px) {
+    .form-page main.large-form-main {
+        min-width: 720px;
+        max-width: 1000px;
+        height: 90%;
+        width: 80%;
+    }
+    .form-page .front-img-container{
+        height: 100%;
+    }
+}
