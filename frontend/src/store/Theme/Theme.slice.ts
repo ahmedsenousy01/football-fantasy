@@ -1,5 +1,5 @@
 import { RootState } from '@/store/index';
-import BrowserDB from '../../BrowserDB';
+import BrowserDB from '@/utils/BrowserDB';
 import { createSlice } from '@reduxjs/toolkit';
 
 interface ThemeState {

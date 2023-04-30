@@ -1,6 +1,6 @@
 import '@/App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Router from './Router';
+import Router from '@/components/Router';
 import { useAppSelector } from '@/hooks/redux-hooks';
 
 function App() {

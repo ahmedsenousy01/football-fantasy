@@ -1,5 +1,5 @@
 {
-  "compilerOptions": {
+	"compilerOptions": {
 		"baseUrl": "./src" /* Specify the base directory to resolve non-relative module names. */,
 		"paths": {
 			"@/components/*": ["components/*"],
@@ -8,7 +8,7 @@
 			"@/api/*": ["api/*"],
 			"@/assets/*": ["assets/*"],
 			"@/hooks/*": ["hooks/*"],
-			"@/store/*": ["store/*"],
+			"@/store/*": ["store/*"]
 		},
 		"target": "ESNext",
 		"useDefineForClassFields": true,
@@ -25,7 +25,7 @@
 		"isolatedModules": true,
 		"noEmit": true,
 		"jsx": "react-jsx"
-  },
-  "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+	},
+	"include": ["src"],
+	"references": [{ "path": "./tsconfig.node.json" }]
 }
