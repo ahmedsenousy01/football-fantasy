@@ -2,7 +2,7 @@ import axios, { AxiosRequestHeaders } from 'axios';
 import { getAuthHeader } from '../utils/auth/authorization';
 
 export default class api {
-	static readonly baseUrl = 'http://localhost:10000/api';
+	static readonly baseUrl = '/api';
 	static readonly server = axios.create({
 		baseURL: this.baseUrl,
 	});
