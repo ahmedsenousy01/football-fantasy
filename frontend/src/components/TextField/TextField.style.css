@@ -1,0 +1,21 @@
+.text-field {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+.text-field label {
+  flex: 1 0 100%;
+}
+.text-field input {
+  flex: 1 0 100%;
+  width: 100%;
+  padding: 2px 5px;
+  border-radius: 5px;
+}
+.text-field input:focus {
+  outline: none;
+  border: 3px solid var(--my-primary-color);
+}
+div[data-lastpass-icon-root] {
+  display: none;
+}

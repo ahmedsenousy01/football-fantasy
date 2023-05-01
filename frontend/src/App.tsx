@@ -1,16 +1,32 @@
-import '@/App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Router from '@/components/Router';
-import { useAppSelector } from '@/hooks/redux-hooks';
+import "@/App.css";
+import "@/styles/form-page.css"
+import "bootstrap/dist/css/bootstrap.min.css";
+import Router from "@/components/Router";
+import { useAppDispatch, useAppSelector } from "@/hooks/redux-hooks";
+import darkModeIcon from "@/assets/icons/dark-mode.svg";
+import lightModeIcon from "@/assets/icons/light-mode.svg";
+import { themeToggle } from "@/store/Theme/Theme.slice";
 
 function App() {
-	const currentTheme = useAppSelector((state) => state.theme.theme);
+  const dispatch = useAppDispatch();
+  const currentTheme = useAppSelector((state) => state.theme.theme);
 
-	return (
-		<div className={'App ' + currentTheme}>
-			<Router />
-		</div>
-	);
+  const toggleTheme = () => {
+    dispatch(themeToggle());
+  };
+
+  return (
+    <div className={"App " + currentTheme}>
+      <button onClick={toggleTheme} className={"theme-btn"}>
+        <img
+          src={currentTheme == "dark" ? darkModeIcon : lightModeIcon}
+          height={30}
+          alt="change theme"
+        />
+      </button>
+      <Router />
+    </div>
+  );
 }
 
 export default App;

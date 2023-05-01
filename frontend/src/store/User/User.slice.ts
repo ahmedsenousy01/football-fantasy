@@ -16,38 +16,37 @@ interface UserState {
 	details?: UserDetails;
 }
 
-const initialState: UserState = {
-	details: undefined,
+const initialState:UserState = {
+  details: undefined
 };
 
-export const fetchUserDetails = createAsyncThunk(
-	'user/getDetails',
-	async (state, action) => {
-		const response = await userDetailsRequest();
-		return response.data.data;
-	}
+export const fetchUserDetails = createAsyncThunk("user/getDetails",
+  async (state, action) => {
+    const response = await userDetailsRequest();
+    return response.data.data;
+  }
 );
 
 export const UserSlice = createSlice({
-	name: 'user',
-	initialState,
-	reducers: {
-		setDetails: (
-			state,
-			{ payload: details }: PayloadAction<UserDetails>
-		) => {
-			state.details = details;
-		},
-	},
-	extraReducers: (builder) => {
-		builder
-			.addCase(fetchUserDetails.pending, (state: UserState, action) => {
-				console.log('Waiting for user details');
-			})
-			.addCase(fetchUserDetails.fulfilled, (state: UserState, action) => {
-				state.details = action.payload;
-			});
-	},
+  name: "user",
+  initialState,
+  reducers: {
+    setDetails: (
+      state,
+      { payload: details }: PayloadAction<UserDetails>
+    ) => {
+      state.details = details;
+    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchUserDetails.fulfilled, (state: UserState, action) => {
+        state.details = action.payload.data;
+      })
+      .addCase(fetchUserDetails.rejected, (state: UserState, action) => {
+        console.warn("User details didn't come through");
+      });
+  },
 });
 
 export const selectUser = (state: RootState) => state.user;

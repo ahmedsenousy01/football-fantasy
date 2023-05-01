@@ -4,11 +4,11 @@ import userReducer from '@/store/User/User.slice';
 import formReducer from '@/store/Forms/Forms.slice';
 
 export const store = configureStore({
-	reducer: {
-		theme: themeReducer,
-		user: userReducer,
-		forms: formReducer,
-	},
+  reducer: {
+    theme: themeReducer,
+    user: userReducer,
+    forms: formReducer,
+  },
 });
 
 export type RootState = ReturnType<typeof store.getState>;
