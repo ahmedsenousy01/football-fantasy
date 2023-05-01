@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { assertDefined } from '@/utils/error/assert';
-import { FormData, makeFormData } from '@/store/Forms/Forms.types';
+import { FormData, makeFormData } from './Forms.types';
 
 type FormsState = Record<string, FormData | null>;
 const initialState: FormsState = {};

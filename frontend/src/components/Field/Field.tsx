@@ -1,12 +1,10 @@
 import { FC, ReactEventHandler, useCallback, useContext, useMemo } from 'react';
 import { ValidationFunc } from '@/utils/validation/validation';
-import TextField, { TextFieldProps } from '@/components/TextField/TextField';
+import TextField, { TextFieldProps } from '../TextField/TextField.component';
 import { useAppDispatch } from '@/hooks/redux-hooks';
-import { FormIdContext } from '@/components/Form/Form';
+import { FormIdContext } from '@/components/Form/Form.component';
 import { addField, updateField } from '@/store/Forms/Forms.slice';
-import NumberField, {
-	NumberFieldProps,
-} from '@/components/NumberField/NumberField';
+import { FieldValue } from '@/store/Forms/Forms.types';
 
 export interface FieldProps {
 	name: string;
@@ -17,7 +15,8 @@ export interface FieldProps {
 	updateValue?: (nextValue: string | number | boolean) => void;
 	updateValidation?: (validation: ValidationFunc[]) => void;
 	required?: boolean;
-	initialValue?: string | number | boolean;
+	initialValue?: FieldValue;
+	className?: string;
 }
 
 const Field: FC<FieldProps> = (props) => {
@@ -81,12 +80,9 @@ const Field: FC<FieldProps> = (props) => {
 		switch (props.type) {
 			case 'password':
 			case 'text':
+			case 'number':
 				const textFieldProps = fieldProps as TextFieldProps;
 				return <TextField {...textFieldProps} />;
-
-			case 'number':
-				const numberFieldProps = fieldProps as NumberFieldProps;
-				return <NumberField {...numberFieldProps} />;
 
 			default:
 				throw new Error(`field type "${props.type}" not implemented`);
@@ -123,7 +119,7 @@ const Field: FC<FieldProps> = (props) => {
 	//   return validation;
 	// };
 
-	return <div>{renderField()}</div>;
+	return <>{renderField()}</>;
 };
 
 export default Field;

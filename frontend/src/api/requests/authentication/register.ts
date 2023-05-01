@@ -1,4 +1,4 @@
-import api from '@/api/index';
+import api from '@/utils/api/Api';
 
 interface RegistrationDetails {
 	firstName: string;

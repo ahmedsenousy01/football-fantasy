@@ -41,11 +41,11 @@ export const UserSlice = createSlice({
 	},
 	extraReducers: (builder) => {
 		builder
-			.addCase(fetchUserDetails.pending, (state: UserState, action) => {
-				console.log('Waiting for user details');
-			})
 			.addCase(fetchUserDetails.fulfilled, (state: UserState, action) => {
-				state.details = action.payload;
+				state.details = action.payload.data;
+			})
+			.addCase(fetchUserDetails.rejected, (state: UserState, action) => {
+				console.warn("User details didn't come through");
 			});
 	},
 });

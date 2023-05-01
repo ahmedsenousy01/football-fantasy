@@ -14,13 +14,13 @@ export const themeSlice = createSlice({
 	name: 'theme',
 	initialState,
 	reducers: {
-		toggle: (state) => {
+		themeToggle: (state) => {
 			state.theme = state.theme === 'light' ? 'dark' : 'light';
 			BrowserDB.set('theme', state.theme);
 		},
 	},
 });
 
-export const { toggle } = themeSlice.actions;
+export const { themeToggle } = themeSlice.actions;
 export const selectTheme = (state: RootState) => state.theme.theme;
 export default themeSlice.reducer;

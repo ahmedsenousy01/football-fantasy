@@ -1,0 +1,11 @@
+#login-page .front-img {
+  background-position: center 60%;
+  background-image: url("https://images.unsplash.com/photo-1606925797300-0b35e9d1794e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=581&q=80");
+}
+
+@media screen and (min-width: 992px) {
+  #login-page .front-img {
+    background-position: top;
+    background-image: url("https://images.unsplash.com/photo-1579952363873-27f3bade9f55?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&w=1000&q=80");
+  }
+}

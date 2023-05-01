@@ -1,6 +1,8 @@
-import { RootState } from '@/store/index';
+// noinspection JSUnusedGlobalSymbols
+
+import { RootState } from '../index';
 import { assertDefined } from '@/utils/error/assert';
-import { FormData } from '@/store/Forms/Forms.types';
+import { FormData } from './Forms.types';
 
 export const createFormSelector = (formId: string) => {
 	return (state: RootState): FormData => {
@@ -9,7 +11,6 @@ export const createFormSelector = (formId: string) => {
 		return form;
 	};
 };
-
 export const createFieldSelector = (formId: string, fieldName: string) => {
 	const formSelector = createFormSelector(formId);
 	return (state: RootState) => {

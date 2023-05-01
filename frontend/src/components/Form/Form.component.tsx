@@ -12,16 +12,20 @@ import { addForm, deleteForm } from '@/store/Forms/Forms.slice';
 import { useSelector } from 'react-redux';
 import { createFormSelector } from '@/store/Forms/Forms.selectors';
 import { FieldValue } from '@/store/Forms/Forms.types';
-import { AxiosError, AxiosResponse } from 'axios';
+import { AxiosError } from 'axios';
+import {
+	FormErrorHandler,
+	FormSubmitHandler,
+	FormSuccessHandler,
+} from '@/components/Form/Form.types';
 
 interface FormProps {
 	id: string;
-	onSubmit: (
-		formResult: Record<string, FieldValue>
-	) => Promise<AxiosResponse>;
-	onSuccess?: (responseData: unknown) => void;
-	onError?: Function;
+	onSubmit: FormSubmitHandler;
+	onSuccess?: FormSuccessHandler;
+	onError?: FormErrorHandler;
 	children?: ReactNode;
+	className?: string;
 }
 
 export const FormIdContext: Context<string> = createContext<string>('');
@@ -61,7 +65,13 @@ const Form: FC<FormProps> = (props: FormProps) => {
 
 	return (
 		<FormIdContext.Provider value={props.id}>
-			<form onSubmit={handleSubmit}>{props.children}</form>
+			<form
+				id={props.id + '-form'}
+				className={'form ' + (props.className ?? '')}
+				onSubmit={handleSubmit}
+			>
+				{props.children}
+			</form>
 		</FormIdContext.Provider>
 	);
 };
