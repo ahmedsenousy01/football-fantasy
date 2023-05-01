@@ -16,12 +16,12 @@ export interface TextFieldProps extends FieldProps {
   maxLength?: number;
 }
 
-export interface NumberFieldProps extends FieldProps{
-  label:string;
+export interface NumberFieldProps extends FieldProps {
+  label: string;
   min?: number;
   max?: number;
-  incrementButton ?: boolean;
-  incrementSize ?: number;
+  incrementButton?: boolean;
+  incrementSize?: number;
 }
 
 const TextField: FC<TextFieldProps> = (props) => {
@@ -37,8 +37,10 @@ const TextField: FC<TextFieldProps> = (props) => {
   };
 
   return (
-    <div id={htmlId} className={"text-field " + (props.className??"")}>
-      <label htmlFor={htmlId + "-input"} className={"muted"}>{props.label}</label>
+    <div id={htmlId} className={"text-field " + (props.className ?? "")}>
+      <label htmlFor={htmlId + "-input"} className={"muted"}>
+        {props.label}
+      </label>
       <input
         id={htmlId + "-input"}
         type={props.type}

@@ -24,29 +24,30 @@ export const fetchUserDetails = createAsyncThunk("user/getDetails",
   async (state, action) => {
     const response = await userDetailsRequest();
     return response.data.data;
-  });
+  }
+);
 
 export const UserSlice = createSlice({
   name: "user",
   initialState,
-  reducers:{
+  reducers: {
     setDetails: (
       state,
       { payload: details }: PayloadAction<UserDetails>
     ) => {
       state.details = details;
-    }
+    },
   },
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
-      .addCase(fetchUserDetails.fulfilled, (state:UserState, action) => {
+      .addCase(fetchUserDetails.fulfilled, (state: UserState, action) => {
         state.details = action.payload.data;
       })
-      .addCase(fetchUserDetails.rejected, (state:UserState, action) => {
+      .addCase(fetchUserDetails.rejected, (state: UserState, action) => {
         console.warn("User details didn't come through");
-      })
-  }
-})
+      });
+  },
+});
 
 export const selectUser = (state: RootState) => state.user;
 export const selectUserDetails = (state: RootState) => state.user.details;

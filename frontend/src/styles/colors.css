@@ -5,7 +5,7 @@
 /*  transition-delay: 0s;*/
 /*}*/
 
-.App{
+.App {
   /* BG */
   --bg-color-main: #242424;
   --bg-color-secondary: #111;
@@ -36,7 +36,7 @@
   --warning-message-solid-color: rgb(169, 165, 16);
 }
 
-.App.light{
+.App.light {
   /* BG */
   --bg-color-main: #fff;
   --bg-color-secondary: #eee;
@@ -55,36 +55,37 @@
   --btn-color-calm: #ddd;
 }
 
-.App{
+.App {
   background-color: var(--bg-color-main);
   color: var(--text-color-main);
 }
 
-.App .btn, .App button{
+.App .btn,
+.App button {
   background-color: var(--btn-color-calm);
   color: var(--text-color-button);
 }
 
-.App input{
+.App input {
   color: var(--text-color-input);
 }
 
-.App .muted{
+.App .muted {
   color: var(--text-color-muted);
 }
 
-.App .message{
+.App .message {
   color: var(--message-solid-color);
   border: 2px solid var(--message-solid-color);
   background-color: var(--message-bg-color);
 }
 
-.App .success-message{
+.App .success-message {
   --message-bg-color: rgba(16, 175, 16, var(--message-bg-opacity));
   --message-solid-color: rgb(13, 134, 13);
 }
 
-.App .error-message{
+.App .error-message {
   --message-bg-color: rgba(173, 19, 19, var(--message-bg-opacity));
   --message-solid-color: rgb(166, 0, 0);
 }

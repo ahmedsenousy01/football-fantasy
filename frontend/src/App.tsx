@@ -8,16 +8,21 @@ import lightModeIcon from "@/assets/icons/light-mode.svg";
 import { themeToggle } from "@/store/Theme/Theme.slice";
 
 function App() {
-	const currentTheme = useAppSelector((state) => state.theme.theme);
+  const dispatch = useAppDispatch();
+  const currentTheme = useAppSelector((state) => state.theme.theme);
 
-	const toggleTheme = () => {
-		dispatch(themeToggle())
-	}
+  const toggleTheme = () => {
+    dispatch(themeToggle());
+  };
 
   return (
     <div className={"App " + currentTheme}>
       <button onClick={toggleTheme} className={"theme-btn"}>
-        <img src={currentTheme == "dark" ? darkModeIcon : lightModeIcon} height={30} alt="change theme"/>
+        <img
+          src={currentTheme == "dark" ? darkModeIcon : lightModeIcon}
+          height={30}
+          alt="change theme"
+        />
       </button>
       <Router />
     </div>

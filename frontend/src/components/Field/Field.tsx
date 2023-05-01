@@ -1,13 +1,5 @@
-import {
-  FC,
-  ReactEventHandler,
-  useCallback,
-  useContext,
-  useMemo,
-} from "react";
-import {
-  ValidationFunc,
-} from "@/utils/validation/validation";
+import { FC, ReactEventHandler, useCallback, useContext, useMemo } from "react";
+import { ValidationFunc } from "@/utils/validation/validation";
 import TextField, { TextFieldProps } from "../TextField/TextField.component";
 import { useAppDispatch } from "@/hooks/redux-hooks";
 import { FormIdContext } from "@components/Form/Form";
@@ -22,7 +14,7 @@ export interface FieldProps {
   updateValue?: (nextValue: string | number | boolean) => void;
   updateValidation?: (validation: ValidationFunc[]) => void;
   required?: boolean;
-  initialValue ?: FieldValue;
+  initialValue?: FieldValue;
   className?: string;
 }
 
@@ -31,29 +23,30 @@ const Field: FC<FieldProps> = (props) => {
   const formId = useContext(FormIdContext);
 
   const getDefaultValue = () => {
-    if(props.initialValue !== undefined){
+    if (props.initialValue !== undefined) {
       return props.initialValue;
     }
 
-    switch (props.type){
+    switch (props.type) {
       case "password":
       case "text":
         return "";
       case "number":
         return 0;
       default:
-        throw Error(`no default type implemented for ${props.type} fields"`)
+        throw Error(`no default type implemented for ${props.type} fields"`);
     }
-  }
+  };
 
   useMemo(() => {
-    dispatch(addField({
-      formId: formId,
-      name: props.name,
-      value: getDefaultValue()
-    }))
-  },
-  []);
+    dispatch(
+      addField({
+        formId: formId,
+        name: props.name,
+        value: getDefaultValue(),
+      })
+    );
+  }, []);
 
   // useEffect(() => {
   //   const validation = getValidation();
@@ -123,11 +116,7 @@ const Field: FC<FieldProps> = (props) => {
   //   return validation;
   // };
 
-  return (
-    <>
-      {renderField()}
-    </>
-  );
+  return <>{renderField()}</>;
 };
 
 export default Field;

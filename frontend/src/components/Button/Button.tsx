@@ -5,7 +5,11 @@ const Button: FC<PropsWithChildren<ButtonHTMLAttributes<any>>> = ({
   className,
   ...props
 }) => {
-  return <button className={`btn ${className}`} {...props}>{children}</button>;
+  return (
+    <button className={`btn ${className}`} {...props}>
+      {children}
+    </button>
+  );
 };
 
 export default Button;
