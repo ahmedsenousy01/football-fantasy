@@ -1,14 +1,9 @@
-import {FC, useState} from "react";
-import Form from "@/components/Form/Form";
+import { FC } from "react";
+import FormComponent from "@/components/Form/Form.component";
 import Field from "@/components/Field/Field";
-import loginRequest, { LoginDetails } from "@/api/requests/authentication/login";
-import { useAppDispatch } from "@/hooks/redux-hooks";
-import { useNavigate } from "react-router-dom";
-import { fetchUserDetails } from "@/store/User/User.slice";
-import { setAuthToken } from "@/utils/auth/authorization";
-import Button from "@/components/Button";
+import { Link } from "react-router-dom";
+import Button from "@/components/Button/Button";
 import "./login.style.css";
-import { AxiosError, AxiosResponse } from "axios";
 import FormBehaviorHandler, { Message } from "@/components/Form/Form.types";
 import Loader from "@/components/Loader";
 
@@ -42,16 +37,16 @@ const Login: FC<LoginProps> = (props) => {
               >
                 <Field name={"email"} label={"email"} type={"text"} />
                 <Field name={"password"} label={"password"} type={"password"} />
-                {
-                  props.isLoading ?
-                    <Loader/>
-                  :
-                    (props.message && (
+                {props.isLoading ? (
+                  <Loader />
+                ) : (
+                  props.message && (
                     <p className={`message ${props.message.type}-message`}>
                       {props.message.content}
-                    </p>))
-                }
-                <Button className={ props.message ? "" : "mt-4"} role={"submit"}>
+                    </p>
+                  )
+                )}
+                <Button className={props.message ? "" : "mt-4"} role={"submit"}>
                   Login
                 </Button>
               </FormComponent>

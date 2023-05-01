@@ -10,15 +10,16 @@ import { fetchUserDetails } from "@/store/User/User.slice";
 import {
   FormErrorHandler,
   FormSubmitHandler,
-  FormSuccessHandler, Message,
+  FormSuccessHandler,
+  Message,
 } from "@/components/Form/Form.types";
 import { AxiosError } from "axios";
-import {assertDefined} from "@/utils/error/assert";
+import { assertDefined } from "@/utils/error/assert";
 
 const LoginContainer: FC = () => {
   const dispatch = useAppDispatch();
   const [isLoading, setLoading] = useState(false);
-  const [message, setMessage] = useState<Message|null>(null);
+  const [message, setMessage] = useState<Message | null>(null);
   const navigate = useNavigate();
 
   const onSubmit: FormSubmitHandler = async (formResult: any) => {
@@ -37,8 +38,8 @@ const LoginContainer: FC = () => {
     setAuthToken(loginResponseData.auth_token);
     setMessage({
       type: "success",
-      content: loginResponseData.message
-    })
+      content: loginResponseData.message,
+    });
     dispatch(fetchUserDetails());
   };
 
@@ -49,15 +50,16 @@ const LoginContainer: FC = () => {
       console.log("status: ", status);
       setMessage({
         type: "neutral",
-        content: message
+        content: message,
       });
     } else {
       const { status, data } = error;
       console.log("Request response: ", status);
+      console.log(data);
       setMessage({
         type: "error",
-        content: (data.message as string).split("|")[0]
-      })
+        content: (data.message as string).split("|")[0],
+      });
     }
   };
 
