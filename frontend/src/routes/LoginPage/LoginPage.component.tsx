@@ -3,16 +3,16 @@ import FormComponent from '@/components/Form/Form.component';
 import Field from '@/components/Field/Field';
 import { Link } from 'react-router-dom';
 import Button from '@/components/Button/Button';
-import './login.style.css';
+import './LoginPage.style.css';
 import FormBehaviorHandler, { Message } from '@/components/Form/Form.types';
 import Loader from '@/components/Loader';
 
-interface LoginProps extends FormBehaviorHandler {
+interface LoginPageProps extends FormBehaviorHandler {
 	isLoading: boolean;
 	message: Message | null;
 }
 
-const Login: FC<LoginProps> = (props) => {
+const LoginPage: FC<LoginPageProps> = (props) => {
 	return (
 		<div
 			id="login-page"
@@ -74,4 +74,4 @@ const Login: FC<LoginProps> = (props) => {
 		</div>
 	);
 };
-export default Login;
+export default LoginPage;

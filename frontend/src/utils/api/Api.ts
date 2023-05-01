@@ -1,4 +1,4 @@
-import axios, { AxiosRequestHeaders } from 'axios';
+import axios, { AxiosRequestHeaders, AxiosError } from 'axios';
 import { getAuthHeader } from '@/utils/auth/authorization';
 
 export default class Api {
@@ -43,5 +43,18 @@ export default class Api {
 			...getAuthHeader(),
 			headers: additionalHeaders,
 		});
+	}
+
+	static defaultCatcher(error: AxiosError) {
+		if (error.response === undefined) {
+			console.log("ERROR: ", error);
+			return new AxiosError("Backend sent error without response");
+		}
+		if (error.response.status < 500) {
+			return error.response;
+		} else {
+			console.log("ERROR: ", error);
+			return error;
+		}
 	}
 }

@@ -1,6 +1,6 @@
 import api from '@/utils/api/Api';
 
-interface RegistrationDetails {
+export interface RegisterRequestBody {
 	firstName: string;
 	lastName: string;
 	email: string;
@@ -8,8 +8,17 @@ interface RegistrationDetails {
 	confirmPassword: string;
 }
 
+export interface ResultResponseData {
+	status?: boolean;
+	message: string;
+	data?:{
+		id:string;
+		email:string;
+	}
+}
+
 export default function registerRequest(
-	registrationDetails: RegistrationDetails
+	requestBody: RegisterRequestBody
 ) {
-	return api.post('/users/register', registrationDetails);
+	return api.post('users/register', requestBody).catch(api.defaultCatcher);
 }

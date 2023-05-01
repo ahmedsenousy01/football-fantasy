@@ -1,0 +1,1 @@
+export { default as RegisterPage } from "@/routes/RegisterPage/RegisterPage.container"

@@ -1,0 +1,11 @@
+#register-page .front-img {
+    background-position: center 60%;
+    background-image: url("https://lh3.googleusercontent.com/blogger_img_proxy/AByxGDScCX4gZ8meRyUg8EkU_Xg8f707Q8Z2lMA4CcfB_8OAuvJpprH6fAfk1t9aVEExbxX2SqbWEZ9DWymDfXrHrhiQDh6n_jzTDgOm9mVykvhqYSXprgG-A6n5AFKS60wP-DLzHw=w919-h516-p-k-no-nu");
+}
+
+@media screen and (min-width: 992px) {
+    #login-page .front-img {
+        background-position: top;
+        background-image: url("https://images.unsplash.com/photo-1579952363873-27f3bade9f55?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&w=1000&q=80");
+    }
+}
