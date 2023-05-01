@@ -1,4 +1,4 @@
-import express, { Application, Request, Response } from "express";
+import express, { Application, NextFunction, Request, Response } from "express";
 import mongoose from "mongoose";
 import compression from "compression";
 import cors from "cors";
@@ -46,6 +46,13 @@ class App {
         this.express.use(morgan("dev"));
         this.express.use(express.json());
         this.express.use(express.urlencoded({ extended: false }));
+        this.express.use((req: Request, res: Response, next: NextFunction) => {
+            res.setHeader(
+                "Content-Security-Policy",
+                "default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' *; frame-src 'self'"
+            );
+            next();
+        });
         this.express.use(
             express.static(path.join(__dirname, "..", "..", "public"))
         );
