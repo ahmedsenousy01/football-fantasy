@@ -1,4 +1,4 @@
-import LeagueInterface from '@/interfaces/league.interface';
+import LeagueInterface from "@/interfaces/league.interface";
 import LeagueModel from "@/models/League";
 
 class LeagueService {
@@ -12,14 +12,20 @@ class LeagueService {
         return await this.model.findById(id).exec();
     }
 
+    public async GetLeagueByName(name: string) {
+        return await this.model.findOne({ name }).exec();
+    }
+
     public async CreateLeague(league: LeagueInterface) {
         return await this.model.insertMany(league);
     }
 
     public async UpdateLeague(id: string, league: LeagueInterface) {
-        return await this.model.findByIdAndUpdate({ _id: id }, league, {
-            new: true,
-        }).exec();
+        return await this.model
+            .findByIdAndUpdate({ _id: id }, league, {
+                new: true,
+            })
+            .exec();
     }
 
     public async DeleteLeague(id: string) {

@@ -4,7 +4,7 @@ import { getAuthHeader } from '@/utils/auth/authorization';
 const webUrl = "https://football-fantasy-dev.onrender.com";
 
 export default class Api {
-	static readonly baseUrl = webUrl + '/api';
+	static readonly baseUrl = '/api';
 	static readonly server = axios.create({
 		baseURL: this.baseUrl,
 	});

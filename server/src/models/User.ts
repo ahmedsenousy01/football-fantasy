@@ -42,8 +42,8 @@ const schema = new Schema({
         default: 100000,
     },
     accountLeague: {
-        type: Types.ObjectId,
-        ref: "league",
+        type: String,
+        // ref: "league",
         required: true,
     },
     teams: {

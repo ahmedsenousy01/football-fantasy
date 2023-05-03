@@ -15,7 +15,6 @@ class UserService {
     public async GetUser(id: string): Promise<User | null> {
         return await this.model
             .findById(id)
-            .populate("accountLeague", "-_id name flag logo")
             .populate("teams", "-_id")
             .exec();
     }
