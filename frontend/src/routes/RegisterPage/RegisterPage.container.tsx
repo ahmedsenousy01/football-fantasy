@@ -10,28 +10,30 @@ import { useAppDispatch } from "@/hooks/redux-hooks";
 import { useNavigate } from "react-router-dom";
 import registerRequest, {
   RegisterRequestBody,
-  ResultResponseData,
+  RegisterResponseData,
 } from "@/api/requests/authentication/register";
 import { fetchUserDetails } from "@/store/User/User.slice";
+import {createDefaultOnError} from "@/components/Form/Form.component";
 
 const RegisterPageContainer: FC = () => {
   const dispatch = useAppDispatch();
   const [isLoading, setLoading] = useState(false);
   const [message, setMessage] = useState<Message | null>(null);
+  const [formSlide, setFormSlide]  = useState(0);
   const navigate = useNavigate();
 
   const onSubmit: FormSubmitHandler = async (
     formResult: RegisterRequestBody
   ) => {
     setLoading(true);
+    console.log("form data: ", formResult);
     const registerResponse = await registerRequest(formResult);
     setLoading(false);
     return registerResponse;
   };
 
   const onSuccess: FormSuccessHandler = (data: unknown) => {
-    const registerResponseData = data as ResultResponseData;
-
+    const registerResponseData = data as RegisterResponseData;
     setMessage({
       type: "success",
       content: registerResponseData.message,
@@ -39,7 +41,7 @@ const RegisterPageContainer: FC = () => {
     dispatch(fetchUserDetails());
   };
 
-  const onError: FormErrorHandler = (error) => {};
+  const onError: FormErrorHandler = createDefaultOnError(setMessage);
 
   return (
     <RegisterPage
@@ -47,8 +49,10 @@ const RegisterPageContainer: FC = () => {
         onSubmit,
         onSuccess,
         onError,
+        setFormSlide,
         isLoading,
         message,
+        formSlide,
       }}
     />
   );

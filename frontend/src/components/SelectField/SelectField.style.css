@@ -1,0 +1,14 @@
+.select-field {
+    margin-bottom: var(--input-margin-bottom);
+}
+.select-field label {
+  display: block;
+}
+.select-field select {
+  border: 3px solid var(--text-color-muted);
+  border-radius: 5px;
+  padding: var(--input-padding);
+}
+.select-field select:focus {
+  border-color: var(--my-primary-color);
+}

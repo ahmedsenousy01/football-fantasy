@@ -1,7 +1,7 @@
 .text-field {
 	display: flex;
 	flex-wrap: wrap;
-	margin-bottom: 10px;
+	margin-bottom: var(--input-margin-bottom);
 }
 
 .text-field label {
@@ -11,7 +11,7 @@
 .text-field input {
 	flex: 1 0 100%;
 	width: 100%;
-	padding: 2px 5px;
+	padding: var(--input-padding);
 	border-radius: 5px;
 }
 
