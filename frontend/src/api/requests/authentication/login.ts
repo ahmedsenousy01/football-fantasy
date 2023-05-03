@@ -1,12 +1,12 @@
 import api from '@/utils/api/Api';
 import { AxiosError } from 'axios';
 
-export interface LoginDetails {
+export interface LoginRequestBody {
 	email: string;
 	password: string;
 }
 
-export default async function loginRequest(loginDetails: LoginDetails) {
+export default async function loginRequest(loginDetails: LoginRequestBody) {
 	return api.post('/users/login', loginDetails).catch((error: AxiosError) => {
 		if (error.response === undefined) {
 			console.log('ERROR: ', error);

@@ -1,14 +1,14 @@
-import { FieldProps } from '../Field/Field';
+import { FieldProps } from "@/components/Field/Field";
 import {
-	FC,
-	ReactEventHandler,
-	SyntheticEvent,
-	useContext,
-	useMemo,
-} from 'react';
-import { assertDefined } from '@/utils/error/assert';
-import { FormIdContext } from '../Form/Form.component';
-import './TextField.style.css';
+  FC,
+  ReactEventHandler,
+  SyntheticEvent,
+  useContext,
+  useMemo,
+} from "react";
+import { assertDefined } from "@/utils/error/assert";
+import { FormIdContext } from "@/components/Form/Form.component";
+import "./TextField.style.css";
 
 export interface TextFieldProps extends FieldProps {
 	label: string;

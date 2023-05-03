@@ -1,10 +1,10 @@
 .lds-dual-ring {
-	display: block;
-	--container-size: 50px;
-	--size: 40px;
-	width: var(--container-size);
-	height: var(--container-size);
-	margin: 10px auto;
+  display: block;
+  --container-size: 40px;
+  --size: 40px;
+  width: var(--container-size);
+  height: var(--container-size);
+  margin: 10px auto;
 }
 
 .lds-dual-ring:after {

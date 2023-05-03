@@ -1,7 +1,8 @@
 import { FC } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { Home } from '@/routes/Home';
-import { Login } from '@/routes/Login';
+import { LoginPage } from '@/routes/LoginPage';
+import {RegisterPage} from "@/routes/RegisterPage";
 
 const router = createBrowserRouter([
 	{
@@ -10,8 +11,12 @@ const router = createBrowserRouter([
 	},
 	{
 		path: '/login',
-		element: <Login />,
+		element: <LoginPage />,
 	},
+	{
+		path: '/register',
+		element: <RegisterPage/>
+	}
 ]);
 
 const Router: FC = () => {

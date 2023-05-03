@@ -1,8 +1,8 @@
 // noinspection JSUnusedGlobalSymbols
 
-import { RootState } from '../index';
-import { assertDefined } from '@/utils/error/assert';
-import { FormData } from './Forms.types';
+import { RootState } from "@/store/index";
+import { assertDefined } from "@/utils/error/assert";
+import { FormData } from "./Forms.types";
 
 export const createFormSelector = (formId: string) => {
 	return (state: RootState): FormData => {

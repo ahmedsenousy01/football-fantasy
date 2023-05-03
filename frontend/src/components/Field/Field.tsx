@@ -1,6 +1,6 @@
 import { FC, ReactEventHandler, useCallback, useContext, useMemo } from 'react';
 import { ValidationFunc } from '@/utils/validation/validation';
-import TextField, { TextFieldProps } from '../TextField/TextField.component';
+import TextField, { TextFieldProps } from '@/components/TextField/TextField.component';
 import { useAppDispatch } from '@/hooks/redux-hooks';
 import { FormIdContext } from '@/components/Form/Form.component';
 import { addField, updateField } from '@/store/Forms/Forms.slice';
