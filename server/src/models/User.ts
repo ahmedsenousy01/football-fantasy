@@ -43,13 +43,12 @@ const schema = new Schema({
     },
     accountLeague: {
         type: String,
-        // ref: "league",
         required: true,
     },
     teams: {
-        type: [Types.ObjectId],
+        type: Types.ObjectId,
         ref: "team",
-        default: [],
+        default: null,
     },
 });
 

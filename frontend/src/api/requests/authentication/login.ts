@@ -1,17 +1,22 @@
-import api from "@/utils/api/Api";
+import api from '@/utils/api/Api';
+import { AxiosError } from 'axios';
 
 export interface LoginRequestBody {
-  email: string;
-  password: string;
-}
-
-export interface LoginResponseData {
-  data: {
-    message: string;
-    auth_token?: string;
-  };
+	email: string;
+	password: string;
 }
 
 export default async function loginRequest(loginDetails: LoginRequestBody) {
-  return api.post("users/login", loginDetails).catch(api.defaultCatcher);
+	return api.post('/users/login', loginDetails).catch((error: AxiosError) => {
+		if (error.response === undefined) {
+			console.log('ERROR: ', error);
+			return new AxiosError('Backend sent error without response');
+		}
+		if (error.response.status < 500) {
+			return error.response;
+		} else {
+			console.log('ERROR: ', error);
+			return error;
+		}
+	});
 }
