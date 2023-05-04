@@ -1,8 +1,8 @@
 import {
 	Context,
-	createContext,
+	createContext, Dispatch,
 	FC,
-	ReactNode,
+	ReactNode, SetStateAction,
 	SyntheticEvent,
 	useEffect,
 	useMemo,
@@ -16,8 +16,30 @@ import { AxiosError } from 'axios';
 import {
 	FormErrorHandler,
 	FormSubmitHandler,
-	FormSuccessHandler,
+	FormSuccessHandler, Message,
 } from '@/components/Form/Form.types';
+
+export const createDefaultOnError = (setMessage: Dispatch<SetStateAction<Message | null>>):FormErrorHandler => {
+	return (error) => {
+		if (error instanceof AxiosError) {
+			const { response, status, message } = error;
+			console.log('response: ', response);
+			console.log('status: ', status);
+			setMessage({
+				type: 'neutral',
+				content: message,
+			});
+		} else {
+			const { status, data } = error;
+			console.log('Request response: ', status);
+			console.log(data);
+			setMessage({
+				type: 'error',
+				content: (data.message as string).split('|')[0],
+			});
+		}
+	}
+}
 
 interface FormProps {
 	id: string;

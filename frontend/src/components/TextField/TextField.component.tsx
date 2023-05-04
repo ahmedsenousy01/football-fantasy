@@ -3,20 +3,19 @@ import {
   FC,
   ReactEventHandler,
   SyntheticEvent,
-  useContext,
-  useMemo,
 } from "react";
 import { assertDefined } from "@/utils/error/assert";
-import { FormIdContext } from "@/components/Form/Form.component";
 import "./TextField.style.css";
 
 export interface TextFieldProps extends FieldProps {
+	htmlId:string;
 	label: string;
 	minLength?: number;
 	maxLength?: number;
 }
 
 export interface NumberFieldProps extends FieldProps {
+	htmlId:string;
 	label: string;
 	min?: number;
 	max?: number;
@@ -25,8 +24,7 @@ export interface NumberFieldProps extends FieldProps {
 }
 
 const TextField: FC<TextFieldProps> = (props) => {
-	const formId = useContext(FormIdContext);
-	const htmlId = useMemo(() => `${formId}-${props.name}`, []);
+
 
 	const onChange: ReactEventHandler = (
 		e: SyntheticEvent<HTMLInputElement>
@@ -39,12 +37,12 @@ const TextField: FC<TextFieldProps> = (props) => {
 	};
 
 	return (
-		<div id={htmlId} className={'text-field ' + (props.className ?? '')}>
-			<label htmlFor={htmlId + '-input'} className={'muted'}>
+		<div id={props.htmlId} className={'text-field ' + (props.className ?? '')}>
+			<label htmlFor={props.htmlId + '-input'} className={'muted'}>
 				{props.label}
 			</label>
 			<input
-				id={htmlId + '-input'}
+				id={props.htmlId + '-input'}
 				type={props.type}
 				onChange={onChange}
 				maxLength={props.maxLength}

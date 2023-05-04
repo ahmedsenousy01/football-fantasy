@@ -5,11 +5,18 @@ import { useAppDispatch } from '@/hooks/redux-hooks';
 import { FormIdContext } from '@/components/Form/Form.component';
 import { addField, updateField } from '@/store/Forms/Forms.slice';
 import { FieldValue } from '@/store/Forms/Forms.types';
+import SelectField, {SelectFieldProps} from "@/components/SelectField/SelectField.component";
+import {assertDefined} from "@/utils/error/assert";
 
 export interface FieldProps {
-	name: string;
+	fieldName: string;
 	label?: string;
 	type: 'number' | 'text' | 'select' | 'radio' | 'checkbox' | 'password';
+	options?:string[];
+	maxLength?:number;
+	minLength?:number;
+	max?:number;
+	min?:number;
 	validation?: ValidationFunc[];
 	onChange?: ReactEventHandler;
 	updateValue?: (nextValue: string | number | boolean) => void;
@@ -22,6 +29,10 @@ export interface FieldProps {
 const Field: FC<FieldProps> = (props) => {
 	const dispatch = useAppDispatch();
 	const formId = useContext(FormIdContext);
+	const htmlId = useMemo(() => {
+		console.log(formId, props.fieldName)
+		return `${formId}-${props.fieldName}`
+	}, [props.fieldName]);
 
 	const getDefaultValue = () => {
 		if (props.initialValue !== undefined) {
@@ -34,6 +45,9 @@ const Field: FC<FieldProps> = (props) => {
 				return '';
 			case 'number':
 				return 0;
+			case 'select':
+				 assertDefined(props.options);
+				 return props.options[0];
 			default:
 				throw Error(
 					`no default type implemented for ${props.type} fields"`
@@ -45,7 +59,7 @@ const Field: FC<FieldProps> = (props) => {
 		dispatch(
 			addField({
 				formId: formId,
-				name: props.name,
+				name: props.fieldName,
 				value: getDefaultValue(),
 			})
 		);
@@ -67,7 +81,7 @@ const Field: FC<FieldProps> = (props) => {
 		dispatch(
 			updateField({
 				formId: formId,
-				name: props.name,
+				name: props.fieldName,
 				value: nextValue,
 			})
 		);
@@ -82,7 +96,11 @@ const Field: FC<FieldProps> = (props) => {
 			case 'text':
 			case 'number':
 				const textFieldProps = fieldProps as TextFieldProps;
-				return <TextField {...textFieldProps} />;
+				return <TextField {...textFieldProps} htmlId={htmlId}/>;
+
+			case 'select':
+				const selectFieldProps = fieldProps as SelectFieldProps;
+				return <SelectField {...selectFieldProps} htmlId={htmlId}/>
 
 			default:
 				throw new Error(`field type "${props.type}" not implemented`);

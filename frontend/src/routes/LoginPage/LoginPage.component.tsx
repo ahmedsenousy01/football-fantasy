@@ -5,11 +5,12 @@ import { Link } from 'react-router-dom';
 import Button from '@/components/Button/Button';
 import './LoginPage.style.css';
 import FormBehaviorHandler, { Message } from '@/components/Form/Form.types';
-import Loader from '@/components/Loader';
+import FormStatus from "@/components/FormStatus/FormStatus.component";
 
 interface LoginPageProps extends FormBehaviorHandler {
 	isLoading: boolean;
 	message: Message | null;
+
 }
 
 const LoginPage: FC<LoginPageProps> = (props) => {
@@ -36,26 +37,16 @@ const LoginPage: FC<LoginPageProps> = (props) => {
 								onError={props.onError}
 							>
 								<Field
-									name={'email'}
+									fieldName={'email'}
 									label={'email'}
 									type={'text'}
 								/>
 								<Field
-									name={'password'}
+									fieldName={'password'}
 									label={'password'}
 									type={'password'}
 								/>
-								{props.isLoading ? (
-									<Loader />
-								) : (
-									props.message && (
-										<p
-											className={`message ${props.message.type}-message`}
-										>
-											{props.message.content}
-										</p>
-									)
-								)}
+								<FormStatus isLoading={props.isLoading} message={props.message}/>
 								<Button
 									className={props.message ? '' : 'mt-4'}
 									role={'submit'}
