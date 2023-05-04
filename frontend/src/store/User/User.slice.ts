@@ -1,8 +1,10 @@
+import { AxiosError } from 'axios';
 // noinspection JSUnusedLocalSymbols
 
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '@/store/index';
 import userDetailsRequest from '@/api/requests/authentication/details';
+import { AxiosResponse } from 'axios';
 
 export interface UserDetails {
 	firstName: string;
@@ -23,7 +25,10 @@ const initialState: UserState = {
 export const fetchUserDetails = createAsyncThunk(
 	'user/getDetails',
 	async (state, action) => {
-		const response = await userDetailsRequest();
+		const response = (await userDetailsRequest()) as AxiosResponse<
+			any,
+			any
+		> || AxiosError<any, any>;
 		return response.data.data;
 	}
 );

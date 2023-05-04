@@ -1,3 +1,4 @@
+import LeagueService from "@/services/league.service";
 import { Request, Response, Router } from "express";
 import Controller from "@/utils/interfaces/controller.interface";
 import UserSchemas from "@/schemas/user.schemas";
@@ -109,7 +110,9 @@ class UserController implements Controller {
             profilePicture: (
                 await MediaStorageService.generateProfilePictureUrl(id)
             ).imageUrl,
-            league: user?.accountLeague,
+            league: await LeagueService.GetLeagueByName(
+                user?.accountLeague || ""
+            ),
             teams: user?.teams,
             budget: user?.budget,
         };
