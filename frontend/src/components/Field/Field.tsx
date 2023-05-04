@@ -30,11 +30,10 @@ const Field: FC<FieldProps> = (props) => {
 	const dispatch = useAppDispatch();
 	const formId = useContext(FormIdContext);
 	const htmlId = useMemo(() => {
-		console.log(formId, props.fieldName)
 		return `${formId}-${props.fieldName}`
 	}, [props.fieldName]);
 
-	const getDefaultValue = () => {
+	const getDefaultValue = ():FieldValue => {
 		if (props.initialValue !== undefined) {
 			return props.initialValue;
 		}

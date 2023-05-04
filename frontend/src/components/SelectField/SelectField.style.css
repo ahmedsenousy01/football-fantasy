@@ -10,5 +10,6 @@
   padding: var(--input-padding);
 }
 .select-field select:focus {
-  border-color: var(--my-primary-color);
+  border-color: var(--primary-color);
+  outline: none;
 }

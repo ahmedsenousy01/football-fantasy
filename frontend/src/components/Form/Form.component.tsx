@@ -57,11 +57,6 @@ const Form: FC<FormProps> = (props: FormProps) => {
 	useMemo(() => {
 		dispatch(addForm(props.id));
 	}, []);
-	useEffect(() => {
-		return () => {
-			dispatch(deleteForm(props.id));
-		};
-	});
 
 	const formData = useSelector(createFormSelector(props.id));
 

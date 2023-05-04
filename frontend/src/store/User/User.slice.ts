@@ -3,13 +3,23 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '@/store/index';
 import userDetailsRequest from '@/api/requests/authentication/details';
+import { AxiosError } from 'axios';
+
+export interface League {
+	name:string;
+	flag:string;
+	logo:string;
+}
 
 export interface UserDetails {
 	firstName: string;
 	lastName: string;
 	email: string;
 	isVerified: boolean;
-	profilePicture: string;
+	profilePicture: string|null;
+	budget:number;
+	role:string;
+	league:League;
 }
 
 interface UserState {
@@ -24,7 +34,11 @@ export const fetchUserDetails = createAsyncThunk(
 	'user/getDetails',
 	async (state, action) => {
 		const response = await userDetailsRequest();
-		return response.data.data;
+		if(response instanceof AxiosError){
+			return response.response?.data;
+		} else {
+			return response.data.data;
+		}
 	}
 );
 
@@ -42,7 +56,7 @@ export const UserSlice = createSlice({
 	extraReducers: (builder) => {
 		builder
 			.addCase(fetchUserDetails.fulfilled, (state: UserState, action) => {
-				state.details = action.payload.data;
+				state.details = action.payload;
 			})
 			.addCase(fetchUserDetails.rejected, (state: UserState, action) => {
 				console.warn("User details didn't come through");

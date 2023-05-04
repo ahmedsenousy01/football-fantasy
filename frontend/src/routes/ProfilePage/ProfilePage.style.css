@@ -1,0 +1,18 @@
+.profile-pic-container{
+    --size: 130px;
+    height: var(--size);
+    width: var(--size);
+
+    border-radius: 10px;
+    overflow: hidden;
+}
+.profile-pic-container img{
+    height: 100%;
+    width: 100%;
+}
+.budget{
+    background-color: var(--primary-color-light-1);
+    border-radius: 20px;
+    padding: 2px 8px;
+    width: fit-content;
+}

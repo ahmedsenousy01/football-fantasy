@@ -1,4 +1,5 @@
-.form-page main {
+
+.form-page main, main.box-main, main.large-box-main {
   background: var(--bg-color-secondary);
   border-radius: 13px;
   overflow: hidden;
@@ -13,10 +14,10 @@
 }
 
 @media screen and (min-width: 992px) {
-  .form-page main.large-form-main {
+  main.large-box-main {
     min-width: 720px;
     max-width: 1000px;
-    height: 90%;
+    height: 90vh;
     width: 80%;
   }
   .form-page .front-img-container {

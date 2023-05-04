@@ -24,7 +24,7 @@ const SelectField:FC<SelectFieldProps> = (props) => {
     }
   };
 
-  return <div className={`select-field ${props.className ?? ""}`}>
+  return <div className={`select-field d-flex flex-column ${props.className ?? ""}`}>
     <label  className={"muted me-3"}>{props.label}</label>
     <select id={props.htmlId} onChange={onChange}>
       {

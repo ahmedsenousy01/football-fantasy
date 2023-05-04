@@ -27,12 +27,12 @@ body,
 
 a {
 	font-weight: 500;
-	color: var(--my-primary-color);
+	color: var(--primary-color);
 	text-decoration: inherit;
 }
 
 a:hover {
-	color: var(--my-primary-color-dark);
+	color: var(--primary-color-dark-1);
 }
 
 body {
@@ -60,7 +60,7 @@ h1 {
 	transition: border-color 0.25s;
 }
 .btn:hover {
-	border-color: var(--my-primary-color);
+	border-color: var(--primary-color);
 }
 .btn:focus,
 .btn:focus-visible {

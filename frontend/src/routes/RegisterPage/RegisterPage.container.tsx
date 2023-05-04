@@ -38,7 +38,7 @@ const RegisterPageContainer: FC = () => {
       type: "success",
       content: registerResponseData.message,
     });
-    dispatch(fetchUserDetails());
+    navigate("/login");
   };
 
   const onError: FormErrorHandler = createDefaultOnError(setMessage);

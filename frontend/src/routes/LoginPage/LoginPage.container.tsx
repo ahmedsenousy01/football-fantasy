@@ -15,6 +15,7 @@ import {
 } from '@/components/Form/Form.types';
 import { AxiosError } from 'axios';
 import { assertDefined } from '@/utils/error/assert';
+import {createDefaultOnError} from "@/components/Form/Form.component";
 
 const LoginPageContainer: FC = () => {
   const dispatch = useAppDispatch();
@@ -39,27 +40,10 @@ const LoginPageContainer: FC = () => {
       content: loginResponseData.message,
     });
     dispatch(fetchUserDetails());
+    navigate("/profile");
   };
 
-	const onError: FormErrorHandler = (error) => {
-		if (error instanceof AxiosError) {
-			const { response, status, message } = error;
-			console.log('response: ', response);
-			console.log('status: ', status);
-			setMessage({
-				type: 'neutral',
-				content: message,
-			});
-		} else {
-			const { status, data } = error;
-			console.log('Request response: ', status);
-			console.log(data);
-			setMessage({
-				type: 'error',
-				content: (data.message as string).split('|')[0],
-			});
-		}
-	};
+	const onError: FormErrorHandler = createDefaultOnError(setMessage);
 
   return (
     <LoginPage

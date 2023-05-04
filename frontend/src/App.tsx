@@ -1,5 +1,5 @@
 import '@/App.css';
-import '@/styles/form-page.css';
+import '@/styles/pageLayouts.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Router from '@/components/Router';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux-hooks';
