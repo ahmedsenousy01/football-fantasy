@@ -8,6 +8,9 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	-webkit-text-size-adjust: 100%;
+
+	--input-padding: 3px 5px;
+	--input-margin-bottom: 10px;
 }
 
 :root,
@@ -15,8 +18,8 @@
 body,
 .App {
 	width: 100vw;
-	height: 100dvh;
-	max-height: 100dvh;
+	height: 100svh;
+	max-height: 100svh;
 
 	margin: 0;
 	padding: 0;

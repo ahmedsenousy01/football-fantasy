@@ -2,6 +2,10 @@ import { Request, Response, Router } from "express";
 import Controller from "@/utils/interfaces/controller.interface";
 import PlayerService from "@/services/player.service";
 import catchAsyncError from "@/utils/tools/catchAsyncError";
+import {
+    adminRoleRequiringMiddleware,
+    jwtTokenRequiringMiddleware,
+} from "@/middleware/jwt.middleware";
 
 class PlayerController implements Controller {
     public path = "/players";
@@ -17,10 +21,25 @@ class PlayerController implements Controller {
             `${this.path}/:id`,
             catchAsyncError(this.getPlayersByLeagueId)
         );
-        this.router.post(`${this.path}/`, catchAsyncError(this.createPlayer));
-        this.router.put(`${this.path}/:id`, catchAsyncError(this.updatePlayer));
+
+        this.router.post(
+            `${this.path}/`,
+            jwtTokenRequiringMiddleware,
+            adminRoleRequiringMiddleware,
+            catchAsyncError(this.createPlayer)
+        );
+
+        this.router.put(
+            `${this.path}/:id`,
+            jwtTokenRequiringMiddleware,
+            adminRoleRequiringMiddleware,
+            catchAsyncError(this.updatePlayer)
+        );
+
         this.router.delete(
             `${this.path}/:id`,
+            jwtTokenRequiringMiddleware,
+            adminRoleRequiringMiddleware,
             catchAsyncError(this.deletePlayer)
         );
     }

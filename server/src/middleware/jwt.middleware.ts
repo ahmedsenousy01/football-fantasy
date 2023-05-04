@@ -1,3 +1,4 @@
+import UserService from '@/services/user.service';
 import JWTService from "@/services/jwt.service";
 import { Request, Response, NextFunction } from "express";
 
@@ -29,6 +30,22 @@ export async function jwtTokenRequiringMiddleware(
         res.locals.token = token.decodedToken?.payload;
     } catch (error) {
         return res.status(401).json({ message: "Invalid Token" });
+    }
+    next();
+}
+
+export async function adminRoleRequiringMiddleware(
+    req: Request,
+    res: Response,
+    next: NextFunction
+): Promise<Response | undefined> {
+    const { id } = res.locals.token;
+    const user = await UserService.GetUser(id);
+
+    if (user?.role !== "admin") {
+        return res.status(401).json({
+            message: "Admin role is required to access the following endpoint",
+        });
     }
     next();
 }
