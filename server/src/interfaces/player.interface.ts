@@ -7,13 +7,14 @@ export default interface Player extends Document {
     picture: string | null;
     position: positionsType;
     price: number;
+    points: number;
     leagueId?: ObjectId;
     statistics?: {
         games: {
             current: number;
             total: number;
         };
-        minutesPerGame: Map<string, number>;
+        minutesPerGame: object;
         goals: {
             current: number;
             total: number;
@@ -32,9 +33,23 @@ export default interface Player extends Document {
                 total: number;
             };
         };
-        cleanSheets: {
-            current: number;
-            total: number;
+        defensive: {
+            current: {
+                saves: number;
+                penaltySaves: number;
+                cleanSheets: number;
+                goalsConceded: number;
+            };
+            total: {
+                saves: number;
+                penaltySaves: number;
+                cleanSheets: number;
+                goalsConceded: number;
+            };
+        };
+        team: {
+            name: string;
+            logo: string;
         };
     };
 }

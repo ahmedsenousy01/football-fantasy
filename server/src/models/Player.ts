@@ -18,6 +18,10 @@ const schema = new Schema({
     price: {
         type: Number,
     },
+    points: {
+        type: Number,
+        default: 0,
+    },
     leagueId: {
         type: Types.ObjectId,
     },
@@ -28,9 +32,7 @@ const schema = new Schema({
         },
         minutesPerGame: {
             current: {
-                type: Map,
-                of: Number,
-    
+                type: Object,
             },
             total: Number,
         },
