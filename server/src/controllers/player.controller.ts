@@ -22,6 +22,11 @@ class PlayerController implements Controller {
             catchAsyncError(this.getPlayersByLeagueId)
         );
 
+        this.router.get(
+            `${this.path}/points/:id`,
+            catchAsyncError(this.getPlayerPoints)
+        );
+
         this.router.post(
             `${this.path}/`,
             jwtTokenRequiringMiddleware,
@@ -52,6 +57,15 @@ class PlayerController implements Controller {
         const page: number = Number(req.query.page);
         const players = await PlayerService.GetPlayersByLeagueId(id, page);
         return res.status(200).json(players);
+    }
+
+    private async getPlayerPoints(
+        req: Request,
+        res: Response
+    ): Promise<Response> {
+        const { id } = req.params;
+        const player = await PlayerService.CalculatePoints(id);
+        return res.status(200).json(player);
     }
 
     private async createPlayer(req: Request, res: Response): Promise<Response> {

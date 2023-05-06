@@ -8,6 +8,12 @@ import config from "@/core/config";
 import App from "@/core/app";
 
 new App(
-    [UserController, PlayerController, LeagueController, TeamController, SearchController],
+    [
+        UserController,
+        PlayerController,
+        LeagueController,
+        TeamController,
+        SearchController,
+    ],
     config.port
 );
