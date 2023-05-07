@@ -14,9 +14,9 @@
 	border: none;
 	aspect-ratio: 1;
 	border-radius: 100%;
-	position: absolute;
-	margin-top: 5px;
-	margin-left: 5px;
+	position: fixed;
+	top: 5px;
+	left: 5px;
 }
 
 .App .message {

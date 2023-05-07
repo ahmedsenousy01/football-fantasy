@@ -6,7 +6,7 @@ import { store } from '@/store/index';
 
 import '@/index.css';
 import '@/styles/colors.css';
-import '@/styles/reusableClasses.css';
+import '@/styles/reusable-classes.css';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 	// <React.StrictMode>

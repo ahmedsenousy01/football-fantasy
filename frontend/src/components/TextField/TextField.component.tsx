@@ -24,8 +24,6 @@ export interface NumberFieldProps extends FieldProps {
 }
 
 const TextField: FC<TextFieldProps> = (props) => {
-
-
 	const onChange: ReactEventHandler = (
 		e: SyntheticEvent<HTMLInputElement>
 	) => {

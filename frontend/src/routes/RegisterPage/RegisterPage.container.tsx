@@ -6,20 +6,18 @@ import {
   FormSuccessHandler,
   Message,
 } from "@/components/Form/Form.types";
-import { useAppDispatch } from "@/hooks/redux-hooks";
 import { useNavigate } from "react-router-dom";
-import registerRequest, {
+import { createDefaultOnError } from "@/components/Form/Form.component";
+import {
+  registerRequest,
   RegisterRequestBody,
   RegisterResponseData,
-} from "@/api/requests/authentication/register";
-import { fetchUserDetails } from "@/store/User/User.slice";
-import {createDefaultOnError} from "@/components/Form/Form.component";
+} from "@/api/requests/User";
 
 const RegisterPageContainer: FC = () => {
-  const dispatch = useAppDispatch();
   const [isLoading, setLoading] = useState(false);
   const [message, setMessage] = useState<Message | null>(null);
-  const [formSlide, setFormSlide]  = useState(0);
+  const [formSlide, setFormSlide] = useState(0);
   const navigate = useNavigate();
 
   const onSubmit: FormSubmitHandler = async (

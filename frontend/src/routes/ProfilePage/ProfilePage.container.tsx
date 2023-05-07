@@ -1,25 +1,17 @@
-import {FC, useEffect} from "react";
+import {FC} from "react";
 import ProfilePage from "@/routes/ProfilePage/ProfilePage.component";
 import {useSelector} from "react-redux";
-import {fetchUserDetails, selectUserDetails} from "@/store/User/User.slice";
-import {useAppDispatch} from "@/hooks/redux-hooks";
-import "./ProfilePage.style.css"
+import {
+  selectIsLoadingUserDetails,
+  selectUserDetails,
+} from "@/store/User/User.slice";
+import "./ProfilePage.style.css";
 
-const ProfilePageContainer:FC = () => {
+const ProfilePageContainer: FC = () => {
   const userDetails = useSelector(selectUserDetails);
-  const dispatch = useAppDispatch();
+  const isLoading = useSelector(selectIsLoadingUserDetails);
 
-  useEffect(() => {
-    if (userDetails == undefined) {
-      dispatch(fetchUserDetails());
-    }
-  });
-
-  return(
-    <ProfilePage
-      {...userDetails}
-    />
-  )
-}
+  return <ProfilePage {...userDetails} isLoading={isLoading}/>;
+};
 
 export default ProfilePageContainer;

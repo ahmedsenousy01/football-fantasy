@@ -1,12 +1,13 @@
-import { Dispatch, FC, SetStateAction } from "react";
+import {Dispatch, FC, SetStateAction} from "react";
 import Form from "@/components/Form/Form.component";
 import Field from "@/components/Field/Field";
 import Button from "@/components/Button/Button";
-import { Link } from "react-router-dom";
-import FormBehaviorHandler, { Message } from "@/components/Form/Form.types";
+import {Link} from "react-router-dom";
+import FormBehaviorHandler, {Message} from "@/components/Form/Form.types";
 import "@/routes/RegisterPage/RegisterPage.style.css";
-import { allLeagues } from "@/api/requests/authentication/register";
 import FormStatus from "@/components/FormStatus/FormStatus.component";
+
+import {allLeagues} from "../../types/Game";
 
 interface RegisterPageProps extends FormBehaviorHandler {
   isLoading: boolean;

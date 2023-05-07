@@ -25,9 +25,6 @@ const formsSlice = createSlice({
 			state: FormsState,
 			{ payload: formId }: PayloadAction<string>
 		) => {
-			if (state[formId] !== undefined) {
-				console.warn(`adding already defined form (form ${formId}).`);
-			}
 			state[formId] = makeFormData(formId);
 		},
 		addField: (

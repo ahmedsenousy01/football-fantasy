@@ -2,8 +2,8 @@
 
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '@/store/index';
-import userDetailsRequest from '@/api/requests/authentication/details';
-import { AxiosError } from 'axios';
+import {AxiosError} from 'axios';
+import {userDetailsRequest} from "@/api/requests/User";
 
 export interface League {
 	name:string;
@@ -12,22 +12,25 @@ export interface League {
 }
 
 export interface UserDetails {
-	firstName: string;
-	lastName: string;
-	email: string;
-	isVerified: boolean;
-	profilePicture: string|null;
-	budget:number;
-	role:string;
-	league:League;
+  firstName: string;
+  lastName: string;
+  email: string;
+  isVerified: boolean;
+  profilePicture: string | null;
+  budget: number;
+  role: string;
+  league: League;
+  teams: any[];
 }
 
 interface UserState {
-	details?: UserDetails;
+  details?: UserDetails;
+  loadingDetails: boolean;
 }
 
 const initialState: UserState = {
-	details: undefined,
+  details: undefined,
+  loadingDetails: false,
 };
 
 export const fetchUserDetails = createAsyncThunk(
@@ -54,16 +57,24 @@ export const UserSlice = createSlice({
 		},
 	},
 	extraReducers: (builder) => {
-		builder
+    builder
+      .addCase(fetchUserDetails.pending, (state: UserState, action) => {
+        state.loadingDetails = true;
+        console.log("awaiting details")
+      })
 			.addCase(fetchUserDetails.fulfilled, (state: UserState, action) => {
-				state.details = action.payload;
-			})
-			.addCase(fetchUserDetails.rejected, (state: UserState, action) => {
-				console.warn("User details didn't come through");
-			});
-	},
+        state.details = action.payload;
+        state.loadingDetails = false;
+      })
+      .addCase(fetchUserDetails.rejected, (state: UserState, action) => {
+        console.warn("User details didn't come through");
+        state.loadingDetails = false;
+      });
+  },
 });
 
 export const selectUser = (state: RootState) => state.user;
 export const selectUserDetails = (state: RootState) => state.user.details;
+export const selectIsLoadingUserDetails = (state: RootState) => state.user.loadingDetails;
+export const selectUserRole = (state: RootState) => state.user.details?.role;
 export default UserSlice.reducer;

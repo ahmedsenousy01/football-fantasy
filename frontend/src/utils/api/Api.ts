@@ -1,7 +1,7 @@
 import axios, { AxiosRequestHeaders, AxiosError } from 'axios';
 import { getAuthHeader } from '@/utils/auth/authorization';
 
-const webUrl = "https://football-fantasy-dev.onrender.com";
+export const webUrl = "https://football-fantasy-dev.onrender.com";
 
 export default class Api {
 	static readonly baseUrl = webUrl + '/api';

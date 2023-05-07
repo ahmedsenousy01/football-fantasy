@@ -1,0 +1,29 @@
+.dashboard-welcome {
+    font-family: Roboto, "Open Sans", sans-serif;
+    text-transform: capitalize;
+    width: 100%;
+}
+
+.dashboard-card {
+    /*padding: 5px 10px;*/
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    background-color: var(--bg-color-secondary);
+}
+
+.dashboard-card h2 {
+    z-index: 20;
+    scale: 1;
+}
+
+.team-icon-container {
+    /*border: 1px solid white;*/
+    height: 4em;
+    min-width: 90px;
+    /*overflow: hidden;*/
+}
+
+.team-icon {
+    scale: 1.8;
+    z-index: 10;
+}

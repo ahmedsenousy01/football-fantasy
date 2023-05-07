@@ -1,18 +1,31 @@
-.profile-pic-container{
+.profile-pic-container {
     --size: 130px;
     height: var(--size);
     width: var(--size);
 
     border-radius: 10px;
     overflow: hidden;
+    border: solid 2px var(--text-color-muted);
 }
-.profile-pic-container img{
-    height: 100%;
-    width: 100%;
+
+.flag-container {
+    height: 30px;
 }
-.budget{
-    background-color: var(--primary-color-light-1);
+
+.logo-container {
+    --size: 160px;
+    height: var(--size);
+    width: var(--size);
+    background-color: white;
+    border-radius: 10px;
+    padding: 15px;
+    margin: auto;
+}
+
+.budget {
+    background-color: var(--primary-color-dark-1);
     border-radius: 20px;
-    padding: 2px 8px;
+    padding: 2px 10px;
     width: fit-content;
+    font-family: "Fira Code", "Cascadia Code", monospace;
 }
