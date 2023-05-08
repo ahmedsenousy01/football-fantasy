@@ -6,8 +6,8 @@ import {
   selectUserRole,
 } from "@/store/User/User.slice";
 import PageLoader from "@/components/PageLoader/PageLoader";
-import AdminDashboard from "@/routes/Admin/Dashboard/Dashboard";
-import UserDashboard from "@/routes/User/Dashboard/Dashboard";
+import AdminDashboard from "@/routes/admin/Dashboard/Dashboard";
+import UserDashboard from "@/routes/user/Dashboard/Dashboard";
 import "./Dashboard.style.css";
 
 const Dashboard: FC = () => {
@@ -24,10 +24,10 @@ const Dashboard: FC = () => {
   ) : (
     <div
       className={
-        "page-wrapper d-flex flex-column justify-content-center align-items-center h-100"
+        "page-wrapper d-flex flex-column justify-content-center align-items-center"
       }
     >
-      <div className="dashboard-header text-center">
+      <div className="dashboard-header text-center mb-3">
         <h1 className={"dashboard-welcome mt-3 mb-1"}>
           Hello,{" "}
           {userDetails

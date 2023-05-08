@@ -13,11 +13,17 @@
 	--input-margin-bottom: 10px;
 }
 
+#root {
+	margin: 0 auto;
+	padding: 2rem;
+	width: 100vw;
+	overflow: hidden;
+}
+
 :root,
 #root,
 body,
 .App {
-	width: 100vw;
 	height: 100svh;
 	max-height: 100svh;
 
@@ -64,4 +70,8 @@ body {
 
 input {
 	border: 3px solid var(--text-color-muted);
+}
+
+.icon{
+	user-select: none;
 }

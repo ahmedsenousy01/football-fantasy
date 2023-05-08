@@ -101,3 +101,7 @@
 .App.dark .icon {
     filter: invert(1);
 }
+
+.App.light .icon {
+    filter: invert(0.1);
+}

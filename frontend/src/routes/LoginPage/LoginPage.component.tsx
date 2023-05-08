@@ -10,7 +10,6 @@ import FormStatus from "@/components/FormStatus/FormStatus.component";
 interface LoginPageProps extends FormBehaviorHandler {
 	isLoading: boolean;
 	message: Message | null;
-
 }
 
 const LoginPage: FC<LoginPageProps> = (props) => {
@@ -18,7 +17,7 @@ const LoginPage: FC<LoginPageProps> = (props) => {
 		<div
 			id="login-page"
 			className={
-				'form-page page-wrapper d-flex justify-content-center align-items-center h-100'
+				'form-page page-wrapper d-flex justify-content-center pt-5'
 			}
 		>
 			<main className={'large-box-main p-0 m-2 m-sm-0'}>

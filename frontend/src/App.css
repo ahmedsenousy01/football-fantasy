@@ -1,12 +1,18 @@
-#root {
-	max-width: 1280px;
-	margin: 0 auto;
-	padding: 2rem;
+body, .App{
+	width: 100%;
+}
+
+.App{
+	overflow-y: auto;
+}
+
+.App {
+	--navbar-height: 70px;
 }
 
 .page-wrapper {
-	/*height: 100%;*/
 	width: 100%;
+	height: calc(100vh - var(--navbar-height));
 }
 
 .theme-btn {
@@ -14,7 +20,6 @@
 	border: none;
 	aspect-ratio: 1;
 	border-radius: 100%;
-	position: fixed;
 	top: 5px;
 	left: 5px;
 }

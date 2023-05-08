@@ -13,7 +13,7 @@ const ProfilePage: FC<ProfilePageProps> = (props) => {
   ) : (
     <div
       id={"profile-page"}
-      className="page-wrapper d-flex flex-column justify-content-center align-items-center h-100"
+      className="page-wrapper d-flex flex-column justify-content-center align-items-center"
     >
       <main className="box-main w-fit m-2">
         <div className="container py-4 w-fit">

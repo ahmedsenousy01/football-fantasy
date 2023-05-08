@@ -6,9 +6,10 @@ import {AxiosError} from 'axios';
 import {userDetailsRequest} from "@/api/requests/User";
 
 export interface League {
-	name:string;
-	flag:string;
-	logo:string;
+  _id: string;
+	name: string;
+	flag: string;
+	logo: string;
 }
 
 export interface UserDetails {
@@ -55,15 +56,21 @@ export const UserSlice = createSlice({
 		) => {
 			state.details = details;
 		},
+    clearDetails: (
+      state
+    ) => {
+      state.details = undefined;
+    }
 	},
 	extraReducers: (builder) => {
     builder
       .addCase(fetchUserDetails.pending, (state: UserState, action) => {
         state.loadingDetails = true;
-        console.log("awaiting details")
+        console.log("awaiting details");
       })
 			.addCase(fetchUserDetails.fulfilled, (state: UserState, action) => {
         state.details = action.payload;
+        console.log(state.details);
         state.loadingDetails = false;
       })
       .addCase(fetchUserDetails.rejected, (state: UserState, action) => {
@@ -73,8 +80,11 @@ export const UserSlice = createSlice({
   },
 });
 
+export const { clearDetails: clearUserDetails } = UserSlice.actions;
+
 export const selectUser = (state: RootState) => state.user;
 export const selectUserDetails = (state: RootState) => state.user.details;
+export const selectUserLeague = (state: RootState) => state.user.details?.league;
 export const selectIsLoadingUserDetails = (state: RootState) => state.user.loadingDetails;
 export const selectUserRole = (state: RootState) => state.user.details?.role;
 export default UserSlice.reducer;

@@ -9,6 +9,7 @@
   width: 100%;
   padding: 20px 0;
 }
+
 .form-page .front-img-container {
   height: 150px;
 }
@@ -17,7 +18,7 @@
   main.large-box-main {
     min-width: 720px;
     max-width: 1000px;
-    height: 90vh;
+    height: 90%;
     width: 80%;
   }
   .form-page .front-img-container {

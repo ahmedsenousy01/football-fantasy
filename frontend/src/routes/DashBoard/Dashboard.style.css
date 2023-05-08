@@ -16,14 +16,17 @@
     scale: 1;
 }
 
-.team-icon-container {
-    /*border: 1px solid white;*/
+.dashboard-card-icon-container {
     height: 4em;
     min-width: 90px;
-    /*overflow: hidden;*/
 }
 
-.team-icon {
+.dashboard-card-icon {
     scale: 1.8;
     z-index: 10;
+}
+
+#edit-users-card .dashboard-card-icon, #manage-teams .dashboard-card-icon{
+    scale: 2;
+    transform: translateX(-10%);
 }

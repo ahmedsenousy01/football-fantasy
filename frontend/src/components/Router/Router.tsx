@@ -14,6 +14,7 @@ import {
 import {useSelector} from "react-redux";
 import PageLoader from "@/components/PageLoader/PageLoader";
 import Dashboard from "@/routes/DashBoard/Dashboard";
+import {PlayersPage} from "@/routes/PlayersPage";
 
 const router = createBrowserRouter([
   {
@@ -44,6 +45,12 @@ const router = createBrowserRouter([
       </ProtectedRoute>
     ),
   },
+  {
+    path: "/players",
+    element: (
+      <PlayersPage/>
+    )
+  }
 ]);
 
 const Router: FC = () => {
