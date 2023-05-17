@@ -2,6 +2,10 @@ import { Request, Response, Router } from "express";
 import Controller from "@/utils/interfaces/controller.interface";
 import PlayerService from "@/services/player.service";
 import catchAsyncError from "@/utils/tools/catchAsyncError";
+import {
+    adminRoleRequiringMiddleware,
+    jwtTokenRequiringMiddleware,
+} from "@/middleware/jwt.middleware";
 
 class PlayerController implements Controller {
     public path = "/players";
@@ -17,10 +21,30 @@ class PlayerController implements Controller {
             `${this.path}/:id`,
             catchAsyncError(this.getPlayersByLeagueId)
         );
-        this.router.post(`${this.path}/`, catchAsyncError(this.createPlayer));
-        this.router.put(`${this.path}/:id`, catchAsyncError(this.updatePlayer));
+
+        this.router.get(
+            `${this.path}/points/:id`,
+            catchAsyncError(this.getPlayerPoints)
+        );
+
+        this.router.post(
+            `${this.path}/`,
+            jwtTokenRequiringMiddleware,
+            adminRoleRequiringMiddleware,
+            catchAsyncError(this.createPlayer)
+        );
+
+        this.router.put(
+            `${this.path}/:id`,
+            jwtTokenRequiringMiddleware,
+            adminRoleRequiringMiddleware,
+            catchAsyncError(this.updatePlayer)
+        );
+
         this.router.delete(
             `${this.path}/:id`,
+            jwtTokenRequiringMiddleware,
+            adminRoleRequiringMiddleware,
             catchAsyncError(this.deletePlayer)
         );
     }
@@ -33,6 +57,15 @@ class PlayerController implements Controller {
         const page: number = Number(req.query.page);
         const players = await PlayerService.GetPlayersByLeagueId(id, page);
         return res.status(200).json(players);
+    }
+
+    private async getPlayerPoints(
+        req: Request,
+        res: Response
+    ): Promise<Response> {
+        const { id } = req.params;
+        const player = await PlayerService.CalculatePoints(id);
+        return res.status(200).json(player);
     }
 
     private async createPlayer(req: Request, res: Response): Promise<Response> {

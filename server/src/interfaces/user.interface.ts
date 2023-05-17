@@ -9,7 +9,7 @@ export default interface User extends Document {
     role: "admin" | "user";
     isVerified?: boolean;
     verificationCode?: string | null;
-    accountLeague: ObjectId;
+    accountLeague: string;
     budget: number;
-    teams: [ObjectId];
+    teams: ObjectId;
 }
