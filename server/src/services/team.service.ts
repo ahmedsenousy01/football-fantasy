@@ -1,5 +1,6 @@
 import { Types, SchemaTypes } from "mongoose";
 import UserService from "@/services/user.service";
+import PlayerService from "@/services/player.service";
 import TeamInterface from "@/interfaces/team.interface";
 import TeamModel from "@/models/Team";
 
@@ -41,11 +42,13 @@ class TeamService {
         return await this.model.findByIdAndRemove({ _id: id }).exec();
     }
 
-    public async BuyPlayer(playerId: string, teamId: string) {
+    public async BuyPlayer(playerId: string, teamId: string, userId: string) {
         const team = await this.model
             .findById(teamId)
             .populate("players")
             .exec();
+        const player = await PlayerService.GetPlayer(playerId);
+        let user = await UserService.GetUser(userId);
         if (team) {
             const indexOfPlayer = team.players.findIndex((e) => {
                 return (
@@ -54,28 +57,38 @@ class TeamService {
                 );
             });
             if (indexOfPlayer === -1) {
-                const updatedTeam = await this.model
-                    .findByIdAndUpdate(
-                        teamId,
-                        {
-                            $push: {
-                                players: new Types.ObjectId(playerId),
+                if (user && user.budget >= (player?.price || 0)) {
+                    const updatedTeam = await this.model
+                        .findByIdAndUpdate(
+                            teamId,
+                            {
+                                $push: {
+                                    players: new Types.ObjectId(playerId),
+                                },
                             },
-                        },
-                        { new: true }
-                    )
-                    .populate("players")
-                    .exec();
+                            { new: true }
+                        )
+                        .populate("players")
+                        .exec();
+                    user = await UserService.UpdateUser(userId, {
+                        budget: (user?.budget || 100000) - (player?.price || 0),
+                    });
+                    return {
+                        status: true,
+                        message: "player bought successfully",
+                        data: { team: updatedTeam, newBudget: user?.budget },
+                    };
+                }
                 return {
-                    status: true,
-                    message: "player bought successfully",
-                    data: updatedTeam,
+                    status: false,
+                    message: "user budget not sufficient",
+                    data: { team, newBudget: user?.budget },
                 };
             }
             return {
                 status: false,
                 message: "player already bought",
-                data: team,
+                data: { team, newBudget: user?.budget },
             };
         }
         return {
@@ -85,11 +98,13 @@ class TeamService {
         };
     }
 
-    public async SellPlayer(playerId: string, teamId: string) {
+    public async SellPlayer(playerId: string, teamId: string, userId: string) {
         const team = await this.model
             .findById(teamId)
             .populate("players")
             .exec();
+        const player = await PlayerService.GetPlayer(playerId);
+        let user = await UserService.GetUser(userId);
         if (team) {
             const indexOfPlayer = team.players.findIndex((e) => {
                 return (
@@ -106,16 +121,19 @@ class TeamService {
                     )
                     .populate("players")
                     .exec();
+                user = await UserService.UpdateUser(userId, {
+                    budget: (user?.budget || 100000) + (player?.price || 0),
+                });
                 return {
                     status: true,
                     message: "player sold successfully",
-                    data: updatedTeam,
+                    data: { team: updatedTeam, newBudget: user?.budget },
                 };
             }
             return {
                 status: false,
                 message: "player was not found in team",
-                data: team,
+                data: { team, newBudget: user?.budget },
             };
         }
         return {

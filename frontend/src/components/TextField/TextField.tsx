@@ -10,6 +10,7 @@ import { FormIdContext } from '@/components/Form/Form.component';
 import { assertDefined } from '@/utils/error/assert';
 
 export interface TextFieldProps extends FieldProps {
+	name: string;
 	label: string;
 	minLength?: number;
 	maxLength?: number;
