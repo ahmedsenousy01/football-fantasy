@@ -86,7 +86,8 @@ class TeamController implements Controller {
         const player = await playerService.GetPlayer(playerId);
         const serviceResponse = await TeamService.BuyPlayer(
             playerId,
-            user?.team?.toString() || ""
+            user?.team?.toString() || "",
+            userId
         );
         if (serviceResponse.status === false) {
             return res.status(400).json(serviceResponse);
@@ -104,9 +105,10 @@ class TeamController implements Controller {
         const player = await playerService.GetPlayer(playerId);
         const serviceResponse = await TeamService.SellPlayer(
             playerId,
-            user?.team?.toString() || ""
+            user?.team?.toString() || "",
+            userId
         );
-        if(serviceResponse.status === false) {
+        if (serviceResponse.status === false) {
             return res.status(400).json(serviceResponse);
         }
         await UserService.UpdateUser(userId, {
