@@ -1,4 +1,4 @@
-import { Schema, Types, model } from "mongoose";
+import { Schema, SchemaTypes, model } from "mongoose";
 import UserInterface from "@/interfaces/user.interface";
 
 const schema = new Schema({
@@ -45,8 +45,8 @@ const schema = new Schema({
         type: String,
         required: true,
     },
-    teams: {
-        type: Types.ObjectId,
+    team: {
+        type: SchemaTypes.ObjectId,
         ref: "team",
         default: null,
     },

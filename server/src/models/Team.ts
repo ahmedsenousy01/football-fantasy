@@ -1,4 +1,4 @@
-import { Schema, Types, model } from "mongoose";
+import { Schema, SchemaTypes, model } from "mongoose";
 import TeamInterface from "@/interfaces/team.interface";
 
 const schema = new Schema({
@@ -6,12 +6,8 @@ const schema = new Schema({
         type: String,
         required: true,
     },
-    active: {
-        type: Boolean,
-        default: false,
-    },
     players: {
-        type: [Types.ObjectId],
+        type: [SchemaTypes.ObjectId],
         ref: "player",
         default: [],
     }

@@ -33,7 +33,7 @@ class PlayerService {
     }
 
     public async CreatePlayer(player: PlayerInterface) {
-        return await this.model.insertMany(player);
+        return (await this.model.insertMany(player))[0];
     }
 
     public async UpdatePlayer(

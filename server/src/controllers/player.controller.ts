@@ -19,6 +19,11 @@ class PlayerController implements Controller {
     private initRoutes(): void {
         this.router.get(
             `${this.path}/:id`,
+            catchAsyncError(this.getPlayersById)
+        );
+
+        this.router.get(
+            `${this.path}/`,
             catchAsyncError(this.getPlayersByLeagueId)
         );
 
@@ -49,13 +54,22 @@ class PlayerController implements Controller {
         );
     }
 
-    private async getPlayersByLeagueId(
+    private async getPlayersById(
         req: Request,
         res: Response
     ): Promise<Response> {
         const { id } = req.params;
+        const player = await PlayerService.GetPlayer(id);
+        return res.status(200).json(player);
+    }
+
+    private async getPlayersByLeagueId(
+        req: Request,
+        res: Response
+    ): Promise<Response> {
+        const { id } = req.query;
         const page: number = Number(req.query.page);
-        const players = await PlayerService.GetPlayersByLeagueId(id, page);
+        const players = await PlayerService.GetPlayersByLeagueId(String(id), page);
         return res.status(200).json(players);
     }
 

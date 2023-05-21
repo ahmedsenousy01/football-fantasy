@@ -11,5 +11,5 @@ export default interface User extends Document {
     verificationCode?: string | null;
     accountLeague: string;
     budget: number;
-    teams: ObjectId;
+    team?: ObjectId;
 }
