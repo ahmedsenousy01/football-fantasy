@@ -1,3 +1,4 @@
+import TeamService from '@/services/team.service';
 import User from "@/interfaces/user.interface";
 import UserModel from "@/models/User";
 import JWTService from "@/services/jwt.service";
@@ -15,7 +16,13 @@ class UserService {
     public async GetUser(id: string): Promise<User | null> {
         return await this.model
             .findById(id)
-            .populate("teams", "-_id")
+            .populate({
+                path: "team",
+                populate: {
+                    path: "players",
+                    model: "player",
+                },
+            })
             .exec();
     }
 
@@ -37,7 +44,9 @@ class UserService {
             };
 
         data.password = BcryptService.hashPassword(data.password);
+        data.team = (await TeamService.CreateEmptyTeam())._id;
         const user: User = await this.model.create(data);
+        console.log(user);
         const { _id, email } = user;
         return {
             status: true,
@@ -55,6 +64,7 @@ class UserService {
             profilePicture?: string | null;
             verificationCode?: string | null;
             isVerified?: boolean;
+            budget?: number;
         }
     ): Promise<User | null> {
         return await this.model

@@ -113,7 +113,7 @@ class UserController implements Controller {
             league: await LeagueService.GetLeagueByName(
                 user?.accountLeague || ""
             ),
-            teams: user?.teams,
+            team: user?.team,
             budget: user?.budget,
         };
         return res.status(200).json({ data });

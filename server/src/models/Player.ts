@@ -1,4 +1,4 @@
-import { Schema, Types, model } from "mongoose";
+import { Schema, SchemaTypes, model } from "mongoose";
 import PlayerInterface from "@/interfaces/player.interface";
 
 const schema = new Schema({
@@ -23,7 +23,7 @@ const schema = new Schema({
         default: 0,
     },
     leagueId: {
-        type: Types.ObjectId,
+        type: SchemaTypes.ObjectId,
     },
     statistics: {
         games: {

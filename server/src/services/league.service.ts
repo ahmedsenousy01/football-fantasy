@@ -17,7 +17,7 @@ class LeagueService {
     }
 
     public async CreateLeague(league: LeagueInterface) {
-        return await this.model.insertMany(league);
+        return (await this.model.insertMany(league))[0];
     }
 
     public async UpdateLeague(id: string, league: LeagueInterface) {

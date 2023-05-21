@@ -1,8 +1,11 @@
 import { Request, Response, Router } from "express";
 import Controller from "@/utils/interfaces/controller.interface";
 import TeamService from "@/services/team.service";
+import UserService from "@/services/user.service";
 import catchAsyncError from "@/utils/tools/catchAsyncError";
 import { jwtTokenRequiringMiddleware } from "@/middleware/jwt.middleware";
+import User from "@/models/User";
+import playerService from "@/services/player.service";
 
 class TeamController implements Controller {
     public path = "/teams";
@@ -15,9 +18,14 @@ class TeamController implements Controller {
 
     private initRoutes(): void {
         this.router.get(
+            `${this.path}/`,
+            jwtTokenRequiringMiddleware,
+            catchAsyncError(this.getTeamByUserId)
+        );
+        this.router.get(
             `${this.path}/:id`,
             jwtTokenRequiringMiddleware,
-            catchAsyncError(this.getTeamsByUserId)
+            catchAsyncError(this.getTeamById)
         );
         this.router.post(`${this.path}/`, catchAsyncError(this.createTeam));
         this.router.put(`${this.path}/:id`, catchAsyncError(this.updateTeam));
@@ -25,14 +33,30 @@ class TeamController implements Controller {
             `${this.path}/:id`,
             catchAsyncError(this.deleteTeam)
         );
+        this.router.put(
+            `${this.path}/buy/:playerId`,
+            jwtTokenRequiringMiddleware,
+            catchAsyncError(this.buyPlayer)
+        );
+        this.router.put(
+            `${this.path}/sell/:playerId`,
+            jwtTokenRequiringMiddleware,
+            catchAsyncError(this.sellPlayer)
+        );
     }
 
-    private async getTeamsByUserId(
+    private async getTeamById(req: Request, res: Response): Promise<Response> {
+        const { id } = req.params;
+        const teams = await TeamService.GetTeam(id);
+        return res.status(200).json(teams);
+    }
+
+    private async getTeamByUserId(
         req: Request,
         res: Response
     ): Promise<Response> {
         const { id } = res.locals.token;
-        const teams = await TeamService.GetTeamsByUserId(id);
+        const teams = await TeamService.GetTeamByUserId(id);
         return res.status(200).json(teams);
     }
 
@@ -53,6 +77,42 @@ class TeamController implements Controller {
         const { id } = req.params;
         const team = await TeamService.DeleteTeam(id);
         return res.status(200).json(team);
+    }
+
+    private async buyPlayer(req: Request, res: Response): Promise<Response> {
+        const { playerId } = req.params;
+        const userId = res.locals.token.id;
+        const user = await User.findById(userId).exec();
+        const player = await playerService.GetPlayer(playerId);
+        const serviceResponse = await TeamService.BuyPlayer(
+            playerId,
+            user?.team?.toString() || ""
+        );
+        if (serviceResponse.status === false) {
+            return res.status(400).json(serviceResponse);
+        }
+        await UserService.UpdateUser(userId, {
+            budget: (user?.budget || 100000) - (player?.price || 0),
+        });
+        return res.status(200).json(serviceResponse);
+    }
+
+    private async sellPlayer(req: Request, res: Response): Promise<Response> {
+        const { playerId } = req.params;
+        const userId = res.locals.token.id;
+        const user = await User.findById(userId).exec();
+        const player = await playerService.GetPlayer(playerId);
+        const serviceResponse = await TeamService.SellPlayer(
+            playerId,
+            user?.team?.toString() || ""
+        );
+        if(serviceResponse.status === false) {
+            return res.status(400).json(serviceResponse);
+        }
+        await UserService.UpdateUser(userId, {
+            budget: (user?.budget || 100000) + (player?.price || 0),
+        });
+        return res.status(200).json(serviceResponse);
     }
 }
 
