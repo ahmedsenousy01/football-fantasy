@@ -1,6 +1,6 @@
 type QueueElement<T> = [T, number]; // Payload and Priority
 
-class PriorityQueue<T> {
+export class PriorityQueue<T> {
     private elements: QueueElement<T>[];
 
     constructor(initialElements: QueueElement<T>[] = []) {

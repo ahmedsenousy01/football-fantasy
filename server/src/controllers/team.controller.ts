@@ -92,9 +92,6 @@ class TeamController implements Controller {
         if (serviceResponse.status === false) {
             return res.status(400).json(serviceResponse);
         }
-        await UserService.UpdateUser(userId, {
-            budget: (user?.budget || 100000) - (player?.price || 0),
-        });
         return res.status(200).json(serviceResponse);
     }
 
