@@ -1,0 +1,9 @@
+.navbar, .navbar-brand, .navbar-toggler, .nav-item, .navbar-nav .nav-link.active{
+    color:inherit;
+}
+.nav-link{
+    color: var(--text-color-muted);
+}
+.navbar{
+    height: var(--navbar-height);
+}

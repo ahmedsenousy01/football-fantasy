@@ -1,0 +1,32 @@
+.dashboard-welcome {
+    font-family: Roboto, "Open Sans", sans-serif;
+    text-transform: capitalize;
+    width: 100%;
+}
+
+.dashboard-card {
+    /*padding: 5px 10px;*/
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    background-color: var(--bg-color-secondary);
+}
+
+.dashboard-card h2 {
+    z-index: 20;
+    scale: 1;
+}
+
+.dashboard-card-icon-container {
+    height: 4em;
+    min-width: 90px;
+}
+
+.dashboard-card-icon {
+    scale: 1.8;
+    z-index: 10;
+}
+
+#edit-users-card .dashboard-card-icon, #manage-teams .dashboard-card-icon{
+    scale: 2;
+    transform: translateX(-10%);
+}

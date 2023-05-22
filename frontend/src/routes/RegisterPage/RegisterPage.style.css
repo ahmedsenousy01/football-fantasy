@@ -1,0 +1,11 @@
+#register-page .front-img {
+    background-position: center 60%;
+    background-image: url("@/assets/images/messi-holding-ball.jpg");
+}
+
+@media screen and (min-width: 992px) {
+    #register-page .front-img {
+        background-position: top;
+        background-image: url("@/assets/images/champions-league-ball.jpg");
+    }
+}
