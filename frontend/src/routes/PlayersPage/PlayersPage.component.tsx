@@ -16,6 +16,9 @@ interface PlayersPageProps {
   buyPlayer: (playerId: string) => any;
   delPlayer: (playerId: string) => any;
   isPlayerBought: (playerId: string) => boolean;
+  searchText: string;
+  setSearchText: Function;
+  onSearch: ReactEventHandler;
 }
 
 const PlayersPage: FC<PlayersPageProps> = ({
@@ -38,6 +41,21 @@ const PlayersPage: FC<PlayersPageProps> = ({
           {budget ? `${budget.toLocaleString()}k` : ""}
         </h5>
       </div>
+
+      <div className="d-flex justify-content-center mb-2">
+        <input
+          className={"rounded-2 me-2"}
+          onChange={(e) => {
+            props.setSearchText(e.target.value);
+          }}
+          value={props.searchText}
+          type="text"
+        />
+        <button className={"btn"} onClick={props.onSearch}>
+          Search
+        </button>
+      </div>
+
       <nav className="pagination-nav text-center">
         <button
           disabled={props.currentPage <= 1}

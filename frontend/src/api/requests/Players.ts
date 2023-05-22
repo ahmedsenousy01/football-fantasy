@@ -57,8 +57,16 @@ export function delPlayerRequest(playerId: string) {
 }
 
 // ----- SEARCH PLAYERS -----
-export function searchPlayers(name: string, page: number) {
+export interface searchPlayerResponseData {
+  totalPages: number;
+  page: number;
+  data: Player[];
+}
+export function searchPlayersRequest(name: string, page: number) {
   return api.get(
-    `/search/players${dataToSearchParams({ name, page: page.toString() })}`
+    `/search/players?${dataToSearchParams({
+      name: name,
+      page: page.toString(),
+    })}`
   );
 }

@@ -5,6 +5,8 @@ import {
   getPlayer,
   getPlayersPage,
   getPlayersPageResponseData,
+  searchPlayerResponseData,
+  searchPlayersRequest,
 } from "@/api/requests/Players";
 import { Player } from "@/types/Game";
 import { assertDefined } from "@/utils/error/assert";
@@ -31,7 +33,10 @@ const initialState: PlayersState = {
 
 export const searchPlayers = createAsyncThunk(
   "players/searchPlayers",
-  async ({ name, page }: { name: string; page: number }, config) => {}
+  async ({ name, page }: { name: string; page: number }, config) => {
+    const response = await searchPlayersRequest(name, page);
+    return response.data;
+  }
 );
 
 export const fetchPlayersPage = createAsyncThunk(
@@ -82,6 +87,16 @@ const playersSlice = createSlice({
         const responseData = action.payload as getPlayersPageResponseData;
         state.players = responseData.results;
         state.totalPageCount = responseData.page.total;
+        state.loadingPlayers = false;
+      })
+      .addCase(searchPlayers.pending, (state, action) => {
+        state.loadingPlayers = true;
+      })
+      .addCase(searchPlayers.fulfilled, (state, action) => {
+        const responseData = action.payload as searchPlayerResponseData;
+        console.log(responseData);
+        state.players = responseData.data;
+        state.totalPageCount = responseData.totalPages;
         state.loadingPlayers = false;
       })
       .addCase(fetchPlayerById.pending, (state, action) => {

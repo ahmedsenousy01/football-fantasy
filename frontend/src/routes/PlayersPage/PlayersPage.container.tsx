@@ -3,6 +3,7 @@ import PlayersPage from "@/routes/PlayersPage/PlayersPage.component";
 import { useAppDispatch } from "@/hooks/redux-hooks";
 import {
   fetchPlayersPage,
+  searchPlayers,
   selectLoadingPlayers,
   selectPlayers,
   selectTotalPages,
@@ -34,6 +35,7 @@ const PlayersPageContainer: FC = () => {
   const userTeamPlayerIds = useSelector(selectUserTeamPlayers)?.map(
     (player) => player._id
   );
+  const [searchText, setSearchText] = useState("");
 
   const [loadingPurchase, setLoadingPurchase] = useState(false);
 
@@ -54,6 +56,10 @@ const PlayersPageContainer: FC = () => {
     assertDefined(response);
   };
 
+  const onSearch = () => {
+    dispatch(searchPlayers({ name: searchText, page: 1 }));
+  };
+
   const onDelete = async (playerId: string) => {
     const response = await delPlayerRequest(playerId);
     dispatch(fetchPlayersPage(page));
@@ -66,6 +72,9 @@ const PlayersPageContainer: FC = () => {
     <PageLoader />
   ) : (
     <PlayersPage
+      searchText={searchText}
+      setSearchText={(s: string) => setSearchText(s)}
+      onSearch={onSearch}
       players={players}
       currentPage={page}
       onNextPage={() => nextPage()}
