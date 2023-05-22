@@ -9,26 +9,26 @@
   /* BG */
   --bg-color-main: #242424;
   --bg-color-secondary: #111;
-    /*--bg-color-weak:*/
+  /*--bg-color-weak:*/
 
-    /* TEXT */
-    --text-color-main: #fff;
-    --text-color-muted: #aaa;
-    --text-color-button: #fff;
-    --text-color-input: #000;
+  /* TEXT */
+  --text-color-main: #fff;
+  --text-color-muted: #aaa;
+  --text-color-button: #fff;
+  --text-color-input: #000;
 
-    /* COLORSCHEME */
-    --primary-color-light-1: #7179ff;
-    --primary-color: #646cff;
-    --primary-color-dark-1: #535bf2;
+  /* COLORSCHEME */
+  --primary-color-light-1: #7179ff;
+  --primary-color: #646cff;
+  --primary-color-dark-1: #535bf2;
 
-    /* BTN */
-    --btn-color-calm: #1a1a1a;
+  /* BTN */
+  --btn-color-calm: #1a1a1a;
 
-    /* MESSAGE */
-    --message-bg-opacity: 0.08;
-    --message-bg-color: rgba(170, 170, 170, var(--message-bg-opacity));
-    --message-solid-color: rgb(170, 170, 170);
+  /* MESSAGE */
+  --message-bg-opacity: 0.05;
+  --message-bg-color: rgba(170, 170, 170, var(--message-bg-opacity));
+  --message-solid-color: rgb(170, 170, 170);
 
   --success-message-color: rgba(125, 199, 109, var(--message-bg-opacity));
   --neutral-message-color: rgba(170, 170, 170, var(--message-bg-opacity));
@@ -44,23 +44,23 @@
 }
 
 .App.light {
-    /* BG */
-    --bg-color-main: #ddd;
-    --bg-color-secondary: #fff;
+  /* BG */
+  --bg-color-main: #ddd;
+  --bg-color-secondary: #fff;
 
-    /* TEXT */
-    --text-color-main: #000;
-    --text-color-muted: #666666;
-    --text-color-button: #000;
-    --text-color-input: #000;
+  /* TEXT */
+  --text-color-main: #000;
+  --text-color-muted: #666666;
+  --text-color-button: #000;
+  --text-color-input: #000;
 
-    /* COLORSCHEME */
-    --primary-color-light-1: #646cff;
-    --primary-color: #535bf2;
-    --primary-color-dark-1: #7179ff;
+  /* COLORSCHEME */
+  --primary-color-light-1: #646cff;
+  --primary-color: #535bf2;
+  --primary-color-dark-1: #7179ff;
 
-    /* BTN */
-    --btn-color-calm: #ddd;
+  /* BTN */
+  --btn-color-calm: #ddd;
 }
 
 .App {
@@ -93,15 +93,20 @@
   --message-solid-color: rgb(13, 134, 13);
 }
 
+.App .warning-message {
+  --message-bg-color: rgba(147, 124, 12, var(--message-bg-opacity));
+  --message-solid-color: rgb(147, 124, 12);
+}
+
 .App .error-message {
   --message-bg-color: rgba(173, 19, 19, var(--message-bg-opacity));
   --message-solid-color: rgb(166, 0, 0);
 }
 
 .App.dark .icon {
-    filter: invert(1);
+  filter: invert(1);
 }
 
 .App.light .icon {
-    filter: invert(0.1);
+  filter: invert(0.1);
 }

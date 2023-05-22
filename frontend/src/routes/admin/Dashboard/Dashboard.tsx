@@ -4,8 +4,6 @@ import ExplorePlayersCard from "@/components/dashboard-cards/ExplorePlayersCard/
 import EditUsersCard from "@/components/dashboard-cards/EditUsersCard/EditUsersCard";
 
 const AdminDashboard: FC = () => {
-  console.warn("trying to access admin dashboard");
-
   return (
     <ProtectedRoute role={"admin"}>
       <div className="container-fluid">

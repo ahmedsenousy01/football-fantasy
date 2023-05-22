@@ -1,17 +1,17 @@
-import {FC} from "react";
+import { FC } from "react";
 import DashboardLinkCard from "@/components/dashboard-cards/DashboardLinkCard/DashboardLinkCard";
-import teamIcon from "@/assets/icons/team-icon.svg"
+import teamIcon from "@/assets/icons/team-icon.svg";
 
-const ManageTeamsCard:FC = () => {
-  return(
+const ManageTeamsCard: FC = () => {
+  return (
     <DashboardLinkCard
-      id={"manage-teams"}
-      title={"Manage Teams"}
-      description={"Make changes to your team(s)"}
-      to={"/teams"}
+      id={"manage-team"}
+      title={"Manage Team"}
+      description={"Make changes to your team"}
+      to={"/team"}
       imgSrc={teamIcon}
     />
-  )
-}
+  );
+};
 
 export default ManageTeamsCard;

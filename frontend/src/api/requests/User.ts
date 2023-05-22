@@ -16,14 +16,12 @@ export interface RegisterResponseData {
   data?: {
     id: string;
     email: string;
-  }
+  };
 }
 
-export function registerRequest(
-  requestBody: RegisterRequestBody
-) {
+export function registerRequest(requestBody: RegisterRequestBody) {
   console.log(requestBody);
-  return api.post('users/register', requestBody).catch(api.defaultCatcher);
+  return api.post("users/register", requestBody).catch(api.defaultCatcher);
 }
 
 // ------- LOGIN -------
@@ -40,10 +38,11 @@ export interface LoginResponseData {
 }
 
 export async function loginRequest(loginDetails: LoginRequestBody) {
+  console.log(loginDetails);
   return api.post("users/login", loginDetails).catch(api.defaultCatcher);
 }
 
 // ------- GET DETAILS -------
 export async function userDetailsRequest() {
-  return api.get('/users/details');
+  return api.get("/users/details");
 }

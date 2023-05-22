@@ -15,10 +15,6 @@ const Dashboard: FC = () => {
   const userRole = useSelector(selectUserRole);
   const loadingRole = useSelector(selectIsLoadingUserDetails);
 
-  if (userRole === undefined) {
-    window.location.replace("/login");
-  }
-
   return loadingRole ? (
     <PageLoader/>
   ) : (

@@ -11,7 +11,7 @@ const ExplorePlayersCard: FC = () => {
     <DashboardLinkCard
       id={"explore-players-card"}
       title={"Explore Players"}
-      to={"/players"}
+      to={"/players/1"}
       description={`Browse through${userRole === "admin" ? ", and edit," : ""} players`}
       imgSrc={footballPlayerIcon}
     />
