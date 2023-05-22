@@ -25,6 +25,7 @@ interface PlayerPageProps extends Player {
   isLoading: boolean;
   onBuyPlayer: (playerId: string) => any;
   onDelete: (playerId: string) => any;
+  isBought: boolean;
 }
 
 const PlayerPage: FC<PlayerPageProps> = (props) => {
@@ -265,11 +266,12 @@ const PlayerPage: FC<PlayerPageProps> = (props) => {
               )
             ) : (
               <button
+                disabled={props.isBought}
                 className={"btn"}
                 type={"button"}
                 onClick={() => props.onBuyPlayer(props._id)}
               >
-                Buy Player
+                {props.isBought ? "Bought" : "Buy Player"}
               </button>
             )}
           </div>

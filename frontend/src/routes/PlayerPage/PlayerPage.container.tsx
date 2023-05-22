@@ -24,6 +24,7 @@ import { buyPlayerRequest } from "@/api/requests/Team";
 import { AxiosResponse } from "axios";
 import { assertDefined } from "@/utils/error/assert";
 import { Player } from "@/types/Game";
+import { selectUserTeamPlayers } from "@/store/User/User.slice";
 
 const PlayerPageContainer: FC = () => {
   const dispatch = useAppDispatch();
@@ -33,6 +34,13 @@ const PlayerPageContainer: FC = () => {
   const editing = useSelector(selectEditingPlayer);
   const [message, setMessage] = useState<Message | null>(null);
   const [submissionIsLoading, setSubmissionLoading] = useState<boolean>(false);
+
+  const userTeamPlayers = useSelector(selectUserTeamPlayers);
+  const userTeamPlayerIds = useMemo(
+    () => userTeamPlayers?.map((player) => player._id),
+    [userTeamPlayers]
+  );
+  const isBought = userTeamPlayerIds?.includes(playerId) ?? false;
 
   const pageLoading = useSelector(selectLoadingPlayer);
 
@@ -90,6 +98,7 @@ const PlayerPageContainer: FC = () => {
       isLoading={submissionIsLoading}
       onBuyPlayer={buyPlayer}
       onDelete={delPlayer}
+      isBought={isBought}
     />
   );
 };
