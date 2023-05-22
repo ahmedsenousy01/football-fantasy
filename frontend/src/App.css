@@ -1,0 +1,30 @@
+body, .App{
+	width: 100%;
+}
+
+.App{
+	overflow-y: auto;
+}
+
+.App {
+	--navbar-height: 70px;
+}
+
+.page-wrapper {
+	width: 100%;
+	height: calc(100vh - var(--navbar-height));
+}
+
+.theme-btn {
+	background: none;
+	border: none;
+	aspect-ratio: 1;
+	border-radius: 100%;
+	top: 5px;
+	left: 5px;
+}
+
+.App .message {
+	padding: 10px 15px;
+	border-radius: 5px;
+}
