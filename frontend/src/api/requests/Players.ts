@@ -51,6 +51,11 @@ export function putPlayer(playerId: string, body: putPlayerRequestBody) {
   return api.put(`/players/${playerId}`, body);
 }
 
+// ---- DELETE PLAYER -----
+export function delPlayerRequest(playerId: string) {
+  return api.del(`/players/${playerId}`);
+}
+
 // ----- SEARCH PLAYERS -----
 export function searchPlayers(name: string, page: number) {
   return api.get(

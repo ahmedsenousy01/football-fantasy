@@ -11,13 +11,20 @@ import { assertDefined } from "@/utils/error/assert";
 
 interface PlayersState {
   editingPlayer: boolean;
+
+  loadingPlayer: boolean;
   player?: Player;
+
+  loadingPlayers: boolean;
   players: Player[];
   totalPageCount: number;
 }
 
 const initialState: PlayersState = {
   editingPlayer: false,
+  loadingPlayer: false,
+
+  loadingPlayers: false,
   players: [],
   totalPageCount: 0,
 };
@@ -68,14 +75,22 @@ const playersSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(fetchPlayersPage.pending, (state, action) => {
+        state.loadingPlayers = true;
+      })
       .addCase(fetchPlayersPage.fulfilled, (state, action) => {
         const responseData = action.payload as getPlayersPageResponseData;
         state.players = responseData.results;
         state.totalPageCount = responseData.page.total;
+        state.loadingPlayers = false;
+      })
+      .addCase(fetchPlayerById.pending, (state, action) => {
+        state.loadingPlayer = true;
       })
       .addCase(fetchPlayerById.fulfilled, (state, action) => {
         state.player = action.payload as Player;
         state.editingPlayer = false;
+        state.loadingPlayer = false;
       });
   },
 });
@@ -84,7 +99,11 @@ export const { startEditingPlayer, setPlayer, stopEditingPlayer } =
   playersSlice.actions;
 
 export const selectPlayer = (state: RootState) => state.players.player;
+export const selectLoadingPlayer = (state: RootState) =>
+  state.players.loadingPlayer;
 export const selectPlayers = (state: RootState) => state.players.players;
+export const selectLoadingPlayers = (state: RootState) =>
+  state.players.loadingPlayers;
 export const selectEditingPlayer = (state: RootState) =>
   state.players.editingPlayer;
 export const selectTotalPages = (state: RootState) =>

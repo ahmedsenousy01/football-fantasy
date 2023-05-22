@@ -3,6 +3,7 @@ import "./Navbar.style.css";
 import darkModeIcon from "@/assets/icons/dark-mode.svg";
 import lightModeIcon from "@/assets/icons/light-mode.svg";
 import NavbarLink from "@/components/NavLink/NavLink";
+import NavLink from "@/components/NavLink/NavLink";
 import { getCurrentPathName } from "@/utils/Url/Url";
 
 interface NavbarProps {
@@ -27,6 +28,9 @@ const Navbar: FC<NavbarProps> = (props) => {
             </li>
             <li className="nav-item">
               <NavbarLink href={"/players/1"}>Players</NavbarLink>
+            </li>
+            <li className="nav-item">
+              <NavLink href={"/leaderboard"}>Leaderboard</NavLink>
             </li>
           </ul>
           <div>

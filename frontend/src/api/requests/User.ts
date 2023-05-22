@@ -20,7 +20,6 @@ export interface RegisterResponseData {
 }
 
 export function registerRequest(requestBody: RegisterRequestBody) {
-  console.log(requestBody);
   return api.post("users/register", requestBody).catch(api.defaultCatcher);
 }
 

@@ -1,38 +1,46 @@
-import { FC, ReactEventHandler, useEffect, useState } from "react";
+import { FC, ReactEventHandler, useMemo, useState } from "react";
 import PlayerPage from "@/routes/PlayerPage/PlayerPage.component";
 import { useSelector } from "react-redux";
 import {
   fetchPlayerById,
   selectEditingPlayer,
+  selectLoadingPlayer,
   selectPlayer,
+  setPlayer,
   startEditingPlayer,
   stopEditingPlayer,
 } from "@/store/Players/Players.slice";
 import PageLoader from "@/components/PageLoader/PageLoader";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { createDefaultOnError } from "@/components/Form/Form.component";
-import { FormSubmitHandler, Message } from "@/components/Form/Form.types";
+import {
+  FormSubmitHandler,
+  FormSuccessHandler,
+  Message,
+} from "@/components/Form/Form.types";
 import { useAppDispatch } from "@/hooks/redux-hooks";
-import { putPlayer } from "@/api/requests/Players";
+import { delPlayerRequest, putPlayer } from "@/api/requests/Players";
 import { buyPlayerRequest } from "@/api/requests/Team";
 import { AxiosResponse } from "axios";
 import { assertDefined } from "@/utils/error/assert";
+import { Player } from "@/types/Game";
 
 const PlayerPageContainer: FC = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const playerId = useParams().id ?? "";
-  const player = useSelector(selectPlayer);
   const editing = useSelector(selectEditingPlayer);
   const [message, setMessage] = useState<Message | null>(null);
-  const [isLoading, setLoading] = useState<boolean>(false);
+  const [submissionIsLoading, setSubmissionLoading] = useState<boolean>(false);
 
-  useEffect(() => {
-    if (player === undefined) {
-      dispatch(fetchPlayerById(playerId));
-    }
+  const pageLoading = useSelector(selectLoadingPlayer);
+
+  useMemo(() => {
+    dispatch(fetchPlayerById(playerId));
   }, []);
 
+  const player = useSelector(selectPlayer);
   const startEditing: ReactEventHandler = () => {
     dispatch(startEditingPlayer());
   };
@@ -41,34 +49,47 @@ const PlayerPageContainer: FC = () => {
   };
 
   const onSubmit: FormSubmitHandler = async (formResult) => {
-    console.log(JSON.stringify(formResult));
-    setLoading(true);
+    setSubmissionLoading(true);
     const response = await putPlayer(playerId, formResult);
-    setLoading(false);
+    setSubmissionLoading(false);
     return response;
   };
 
-  const buy = async (playerId: string) => {
-    console.log(`buying player: ${playerId}`);
+  const onSuccess: FormSuccessHandler = (data) => {
+    dispatch(stopEditingPlayer());
+  };
+
+  const buyPlayer = async (playerId: string) => {
     const response = (await buyPlayerRequest(playerId).catch(
       createDefaultOnError()
     )) as AxiosResponse;
+    console.log(response);
+    const updatedPlayer = response.data as Player;
+    dispatch(setPlayer(updatedPlayer));
+    console.log(updatedPlayer);
     assertDefined(response);
   };
 
-  return player === undefined ? (
+  const delPlayer = async (playerId: string) => {
+    const response = await delPlayerRequest(playerId);
+    navigate("/players/1");
+  };
+
+  return pageLoading || player === undefined ? (
     <PageLoader />
   ) : (
     <PlayerPage
       {...player}
       editing={editing}
       onSubmit={onSubmit}
+      onSuccess={onSuccess}
       onError={createDefaultOnError(setMessage)}
       startEditing={startEditing}
       onCancel={onCancel}
       message={message}
-      isLoading={isLoading}
-      onBuy={buy}
+      isLoading={submissionIsLoading}
+      onBuyPlayer={buyPlayer}
+      onDelete={delPlayer}
     />
   );
 };

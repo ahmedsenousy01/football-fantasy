@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "deploy": "cd frontend && npm run build && cd ../server && npm run build && npm start",
-    "dev": "npm run dev --prefix frontend & npm start --prefix server"
+    "dev": "npm run dev --prefix frontend & npm run dev --prefix server"
   },
   "keywords": [],
   "author": "",

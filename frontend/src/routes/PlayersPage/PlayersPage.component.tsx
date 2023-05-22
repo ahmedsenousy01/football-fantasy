@@ -2,6 +2,9 @@ import { FC, ReactEventHandler } from "react";
 import "./PlayersPage.style.tsx.css";
 import PlayerCard from "@/components/PlayerCard/PlayerCard.component";
 import { Player } from "@/types/Game";
+import { useSelector } from "react-redux";
+import { selectUserBudget } from "@/store/User/User.slice";
+import coinsIcon from "@/assets/icons/coins-icon.svg";
 
 interface PlayersPageProps {
   players: Player[];
@@ -10,12 +13,31 @@ interface PlayersPageProps {
   onPrevPage: ReactEventHandler;
   totalPages: number;
   onEdit: ReactEventHandler;
-  onBuy: (playerId: string) => any;
+  buyPlayer: (playerId: string) => any;
+  delPlayer: (playerId: string) => any;
+  isPlayerBought: (playerId: string) => boolean;
 }
 
-const PlayersPage: FC<PlayersPageProps> = ({ onBuy, ...props }) => {
+const PlayersPage: FC<PlayersPageProps> = ({
+  delPlayer,
+  buyPlayer,
+  ...props
+}) => {
+  const budget = (useSelector(selectUserBudget) ?? 0) / 1000;
+
   return (
     <div className="page-wrapper">
+      <div className="container">
+        <h5 className="budget">
+          Budget:&nbsp;
+          <img
+            className={"icon inline-icon coins-icon"}
+            src={coinsIcon}
+            alt=""
+          />
+          {budget ? `${budget.toLocaleString()}k` : ""}
+        </h5>
+      </div>
       <nav className="pagination-nav text-center">
         <button
           disabled={props.currentPage <= 1}
@@ -41,8 +63,12 @@ const PlayersPage: FC<PlayersPageProps> = ({ onBuy, ...props }) => {
               className="player-card-container col-xl-2 col-lg-3 col-md-4 col-6"
             >
               <PlayerCard
-                onBuy={(e) => {
-                  onBuy(player._id);
+                isBought={props.isPlayerBought(player._id)}
+                onDelete={() => {
+                  delPlayer(player._id);
+                }}
+                buyPlayer={(e) => {
+                  buyPlayer(player._id);
                 }}
                 player={player}
                 onClick={props.onEdit}

@@ -74,6 +74,11 @@
   color: var(--text-color-button);
 }
 
+.App .btn:disabled,
+.App button:disabled {
+  filter: brightness(1.5);
+}
+
 .App input {
   color: var(--text-color-input);
 }

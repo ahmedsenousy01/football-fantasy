@@ -13,7 +13,7 @@ export interface UserDetails {
   isVerified: boolean;
   profilePicture: string | null;
   budget: number;
-  role: string;
+  role: "user" | "admin";
   league: string;
   team: Team;
 }
@@ -73,9 +73,13 @@ export const { clearDetails: clearUserDetails } = UserSlice.actions;
 
 export const selectUser = (state: RootState) => state.user;
 export const selectUserDetails = (state: RootState) => state.user.details;
+export const selectUserBudget = (state: RootState) =>
+  state.user.details?.budget;
 export const selectUserLeague = (state: RootState) =>
   state.user.details?.league;
 export const selectIsLoadingUserDetails = (state: RootState) =>
   state.user.loadingDetails;
 export const selectUserRole = (state: RootState) => state.user.details?.role;
+export const selectUserTeamPlayers = (state: RootState) =>
+  state.user.details?.team.players;
 export default UserSlice.reducer;

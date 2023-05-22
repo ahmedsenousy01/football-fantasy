@@ -6,10 +6,11 @@ import {
   ReactNode,
   SetStateAction,
   SyntheticEvent,
+  useEffect,
   useMemo,
 } from "react";
 import { useAppDispatch } from "@/hooks/redux-hooks";
-import { addForm } from "@/store/Forms/Forms.slice";
+import { addForm, deleteForm } from "@/store/Forms/Forms.slice";
 import { useSelector } from "react-redux";
 import { createFormSelector } from "@/store/Forms/Forms.selectors";
 import { AxiosError } from "axios";
@@ -73,9 +74,17 @@ const Form: FC<FormProps> = (props: FormProps) => {
     dispatch(addForm(props.id));
   }, []);
 
+  useEffect(() => {
+    return () => {
+      dispatch(deleteForm(props.id));
+    };
+  }, []);
+
   const formData = useSelector(createFormSelector(props.id));
 
   const handleSubmit = async (e: SyntheticEvent) => {
+    const nativeEvent = e.nativeEvent as SubmitEvent;
+    console.log(nativeEvent.submitter);
     e.preventDefault();
 
     const fields = formData.fields;
@@ -90,7 +99,6 @@ const Form: FC<FormProps> = (props: FormProps) => {
           currentSection[sectionName] = {};
         }
         currentSection = currentSection[sectionName];
-        console.log("added " + sectionName + " to ", formResult);
       }
       currentSection[directoryQueue.pop()] = fields[fieldName].value;
     }

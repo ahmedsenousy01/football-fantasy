@@ -5,6 +5,7 @@ import Field from "@/components/Field/Field";
 import {
   FormErrorHandler,
   FormSubmitHandler,
+  FormSuccessHandler,
   Message,
 } from "@/components/Form/Form.types";
 import "./PlayerPage.style.css";
@@ -17,11 +18,13 @@ interface PlayerPageProps extends Player {
   editing: boolean;
   message: Message | null;
   onSubmit: FormSubmitHandler;
+  onSuccess: FormSuccessHandler;
   onError: FormErrorHandler;
   onCancel: ReactEventHandler;
   startEditing: ReactEventHandler;
   isLoading: boolean;
-  onBuy: (playerId: string) => any;
+  onBuyPlayer: (playerId: string) => any;
+  onDelete: (playerId: string) => any;
 }
 
 const PlayerPage: FC<PlayerPageProps> = (props) => {
@@ -35,11 +38,11 @@ const PlayerPage: FC<PlayerPageProps> = (props) => {
           id={"player"}
           onSubmit={props.onSubmit}
           onError={props.onError}
-          onSuccess={() => {}}
+          onSuccess={props.onSuccess}
           readonly={!editing}
         >
           <div className="row gx-3">
-            <div className="col-auto">
+            <div className="d-flex align-items-center col-auto">
               <img src={props.picture} alt="" className={"rounded-2"} />
             </div>
             <div className="col">
@@ -54,6 +57,12 @@ const PlayerPage: FC<PlayerPageProps> = (props) => {
                 fieldName={"points"}
                 type={"number"}
                 initialValue={props.points}
+              />
+              <Field
+                label={"Price"}
+                fieldName={"price"}
+                type={"number"}
+                initialValue={props.price}
               />
             </div>
           </div>
@@ -228,17 +237,38 @@ const PlayerPage: FC<PlayerPageProps> = (props) => {
                   >
                     Cancel
                   </button>
-                  <button className={"btn"} type={"submit"}>
+                  <button
+                    key={"submit-button"}
+                    className={"btn"}
+                    type={"submit"}
+                  >
                     Save Changes
                   </button>
                 </>
               ) : (
-                <button className={"btn"} onClick={props.startEditing}>
-                  Edit Player
-                </button>
+                <>
+                  <button
+                    className="btn bg-danger me-2"
+                    type={"button"}
+                    onClick={() => props.onDelete(props._id)}
+                  >
+                    Delete Player
+                  </button>
+                  <button
+                    className={"btn"}
+                    type={"button"}
+                    onClick={props.startEditing}
+                  >
+                    Edit Player
+                  </button>
+                </>
               )
             ) : (
-              <button className={"btn"} onClick={() => props.onBuy(props._id)}>
+              <button
+                className={"btn"}
+                type={"button"}
+                onClick={() => props.onBuyPlayer(props._id)}
+              >
                 Buy Player
               </button>
             )}

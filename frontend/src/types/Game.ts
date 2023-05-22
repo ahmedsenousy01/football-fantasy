@@ -36,6 +36,7 @@ export type Position = (typeof allPositions)[number];
 export interface Team {
   name: string;
   logo: string;
+  players: Player[];
 }
 
 export interface PlayerStatistics {

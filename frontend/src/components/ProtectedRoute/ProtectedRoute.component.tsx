@@ -1,5 +1,5 @@
-import {FC, ReactNode, useMemo} from "react";
-import {useSelector} from "react-redux";
+import { FC, ReactNode, useMemo } from "react";
+import { useSelector } from "react-redux";
 import {
   selectIsLoadingUserDetails,
   selectUserRole,
@@ -22,11 +22,10 @@ const ProtectedRoute: FC<ProtectedRouteProps> = (props) => {
       props.role === "user"
         ? ["user", "admin"]
         : props.role === "admin"
-          ? ["admin"]
-          : [],
+        ? ["admin"]
+        : [],
     [props.role]
   );
-  console.log("allowed roles: ", authorizedRoles);
 
   const authorized: boolean = authorizedRoles.includes(userRole ?? "");
 
@@ -37,11 +36,11 @@ const ProtectedRoute: FC<ProtectedRouteProps> = (props) => {
   return (
     <>
       {isLoading ? (
-        <PageLoader/>
+        <PageLoader />
       ) : authorized ? (
         props.children
       ) : (
-        <NotAuthorizedPage/>
+        <NotAuthorizedPage />
       )}
     </>
   );
