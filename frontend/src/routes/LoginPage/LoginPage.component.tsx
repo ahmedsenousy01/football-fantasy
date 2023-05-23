@@ -10,7 +10,6 @@ import FormStatus from "@/components/FormStatus/FormStatus.component";
 interface LoginPageProps extends FormBehaviorHandler {
 	isLoading: boolean;
 	message: Message | null;
-
 }
 
 const LoginPage: FC<LoginPageProps> = (props) => {
@@ -18,10 +17,10 @@ const LoginPage: FC<LoginPageProps> = (props) => {
 		<div
 			id="login-page"
 			className={
-				'form-page page-wrapper d-flex justify-content-center align-items-center'
+				'form-page page-wrapper d-flex justify-content-center pt-5'
 			}
 		>
-			<main className={'large-form-main p-0 m-2 m-sm-0'}>
+			<main className={'large-box-main p-0 m-2 m-sm-0'}>
 				<div className={'row h-100 flex-col flex-lg-row'}>
 					<div className="front-img-container col-lg-8 p-0 h-0">
 						<div className={'background-cover front-img'} />
@@ -48,7 +47,7 @@ const LoginPage: FC<LoginPageProps> = (props) => {
 								/>
 								<FormStatus isLoading={props.isLoading} message={props.message}/>
 								<Button
-									className={props.message ? '' : 'mt-4'}
+									className={(props.message !== undefined) ? '' : 'mt-4'}
 									role={'submit'}
 								>
 									Login

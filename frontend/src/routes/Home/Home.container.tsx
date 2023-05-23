@@ -1,8 +1,10 @@
-import { FC } from 'react';
-import Home from '@/routes/Home/Home.component';
+import {FC} from "react";
+import Home from "@/routes/Home/Home.component";
 
 const HomeContainer: FC = () => {
-	return <Home />;
+	window.location.replace("/dashboard");
+
+	return <Home/>;
 };
 
 export default HomeContainer;

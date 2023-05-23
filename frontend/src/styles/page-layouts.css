@@ -1,19 +1,34 @@
-.form-page main {
+.form-page main,
+.card-box,
+main.box-main,
+main.large-box-main {
   background: var(--bg-color-secondary);
   border-radius: 13px;
   overflow: hidden;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
+
+.card-box {
+  padding: 10px 15px;
+}
+
 .form-page .form-container {
   width: 100%;
   padding: 20px 0;
 }
+
 .form-page .front-img-container {
   height: 150px;
 }
 
+.App input[readonly] {
+  background-color: transparent;
+  border: none !important;
+  color: var(--text-color-main);
+}
+
 @media screen and (min-width: 992px) {
-  .form-page main.large-form-main {
+  main.large-box-main {
     min-width: 720px;
     max-width: 1000px;
     height: 90%;

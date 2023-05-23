@@ -1,0 +1,51 @@
+.box-link {
+    display: block;
+}
+
+.w-fit {
+    width: fit-content;
+    width: -moz-fit-content;
+}
+
+.error-status-code {
+    font-size: 100px;
+}
+
+.inline-icon {
+    height: 1em;
+}
+
+.coins-icon {
+    margin-top: -5px;
+    margin-right: 3px;
+}
+
+.img-container img {
+    width: 100%;
+    height: 100%;
+}
+
+.object-contain, .object-cover {
+    width: 100%;
+    height: 100%;
+}
+
+.object-contain {
+    object-fit: contain;
+}
+
+.object-cover {
+    object-fit: cover;
+}
+
+.background-cover {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+}
+
+@media (min-width: 992px) {
+    .h-lg-100 {
+        height: 100%;
+    }
+}

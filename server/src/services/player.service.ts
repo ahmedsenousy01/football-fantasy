@@ -23,6 +23,10 @@ class PlayerService {
             .limit(offset)
             .exec();
 
+        players.forEach(async (player) => {
+            return await this.CalculatePoints(player._id);
+        });
+
         return {
             page: {
                 current: page || 1,
