@@ -1,0 +1,6 @@
+#player-form .form-section {
+  border-radius: 10px;
+  border: 2px solid var(--text-color-main);
+  padding: 5px 10px;
+  height: 100%;
+}
