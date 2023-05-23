@@ -19,9 +19,7 @@ class LeagueController implements Controller {
         );
         this.router.post(`${this.path}/`, catchAsyncError(this.createLeague));
         this.router.put(`${this.path}/:id`, catchAsyncError(this.updateLeague));
-        this.router.delete(
-            `${this.path}/:id`,
-            catchAsyncError(this.deleteLeague)
+        this.router.delete(`${this.path}/:id`,catchAsyncError(this.deleteLeague)
         );
     }
 

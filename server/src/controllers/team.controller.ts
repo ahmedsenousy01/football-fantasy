@@ -92,7 +92,6 @@ class TeamController implements Controller {
         if (serviceResponse.status === false) {
             return res.status(400).json(serviceResponse);
         }
-
         return res.status(200).json(serviceResponse);
     }
 
