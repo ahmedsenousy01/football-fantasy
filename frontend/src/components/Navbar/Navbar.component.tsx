@@ -5,6 +5,8 @@ import lightModeIcon from "@/assets/icons/light-mode.svg";
 import NavbarLink from "@/components/NavLink/NavLink";
 import NavLink from "@/components/NavLink/NavLink";
 import { getCurrentPathName } from "@/utils/Url/Url";
+import { useSelector } from "react-redux";
+import { selectTheme } from "@/store/Theme/Theme.slice";
 
 interface NavbarProps {
   toggleTheme: ReactEventHandler;
@@ -14,9 +16,14 @@ interface NavbarProps {
 
 const Navbar: FC<NavbarProps> = (props) => {
   const location = getCurrentPathName();
+  const theme = useSelector(selectTheme);
 
   return (
-    <nav className="navbar navbar-expand-sm navbar-dark">
+    <nav
+      className={`navbar navbar-expand-sm ${
+        theme === "dark" ? "navbar-dark" : "navbar-light"
+      }`}
+    >
       <div className="container-fluid">
         <a className="navbar-brand" href={"/"}>
           FANBALL

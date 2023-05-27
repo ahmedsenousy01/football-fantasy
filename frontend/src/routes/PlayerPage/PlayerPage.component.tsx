@@ -74,13 +74,13 @@ const PlayerPage: FC<PlayerPageProps> = (props) => {
               <div className="form-section">
                 <h3>Games</h3>
                 <Field
-                  fieldName={"games/current"}
+                  fieldName={"statistics/games/current"}
                   label={"current"}
                   type={"number"}
                   initialValue={props.statistics.games.current}
                 />
                 <Field
-                  fieldName={"games/total"}
+                  fieldName={"statistics/games/total"}
                   label={"total"}
                   type={"number"}
                   initialValue={props.statistics.games.total}
@@ -98,13 +98,13 @@ const PlayerPage: FC<PlayerPageProps> = (props) => {
               <div className="form-section">
                 <h3>Goals</h3>
                 <Field
-                  fieldName={"goals/current"}
+                  fieldName={"statistics/goals/current"}
                   label={"current"}
                   type={"number"}
                   initialValue={props.statistics.goals.current}
                 />
                 <Field
-                  fieldName={"goals/total"}
+                  fieldName={"statistics/goals/total"}
                   label={"total"}
                   type={"number"}
                   initialValue={props.statistics.goals.total}
@@ -117,13 +117,13 @@ const PlayerPage: FC<PlayerPageProps> = (props) => {
                 <h3>Assists</h3>
                 <Field
                   label={"current"}
-                  fieldName={"assists/current"}
+                  fieldName={"statistics/assists/current"}
                   type={"number"}
                   initialValue={props.statistics.assists.current}
                 />
                 <Field
                   label={"total"}
-                  fieldName={"assists/total"}
+                  fieldName={"statistics/assists/total"}
                   type={"number"}
                   initialValue={props.statistics.assists.total}
                 />
@@ -137,13 +137,13 @@ const PlayerPage: FC<PlayerPageProps> = (props) => {
                   <h6 className={"message warning-message"}>Yellow</h6>
                   <Field
                     label={"current"}
-                    fieldName={"cards/yellow/current"}
+                    fieldName={"statistics/cards/yellow/current"}
                     type={"number"}
                     initialValue={props.statistics.cards.yellow.current}
                   />
                   <Field
                     label={"total"}
-                    fieldName={"cards/yellow/total"}
+                    fieldName={"statistics/cards/yellow/total"}
                     type={"number"}
                     initialValue={props.statistics.cards.yellow.total}
                   />
@@ -152,13 +152,13 @@ const PlayerPage: FC<PlayerPageProps> = (props) => {
                   <h6 className={"message error-message"}>Red</h6>
                   <Field
                     label={"current"}
-                    fieldName={"cards/red/current"}
+                    fieldName={"statistics/cards/red/current"}
                     type={"number"}
                     initialValue={props.statistics.cards.red.current}
                   />
                   <Field
                     label={"total"}
-                    fieldName={"cards/red/total"}
+                    fieldName={"statistics/cards/red/total"}
                     type={"number"}
                     initialValue={props.statistics.cards.red.total}
                   />
@@ -173,13 +173,13 @@ const PlayerPage: FC<PlayerPageProps> = (props) => {
                   <h6>Current</h6>
                   <Field
                     label={"Saves"}
-                    fieldName={"defensive/current/saves"}
+                    fieldName={"statistics/defensive/current/saves"}
                     type={"number"}
                     initialValue={props.statistics.defensive.current.saves}
                   />
                   <Field
                     label={"Penalty Saves"}
-                    fieldName={"defensive/current/penaltySaves"}
+                    fieldName={"statistics/defensive/current/penaltySaves"}
                     type={"number"}
                     initialValue={
                       props.statistics.defensive.current.penaltySaves
@@ -187,7 +187,7 @@ const PlayerPage: FC<PlayerPageProps> = (props) => {
                   />
                   <Field
                     label={"Clean Sheets"}
-                    fieldName={"defensive/current/cleanSheets"}
+                    fieldName={"statistics/defensive/current/cleanSheets"}
                     type={"number"}
                     initialValue={
                       props.statistics.defensive.current.cleanSheets
@@ -198,19 +198,19 @@ const PlayerPage: FC<PlayerPageProps> = (props) => {
                   <h6>Total</h6>
                   <Field
                     label={"Saves"}
-                    fieldName={"defensive/total/saves"}
+                    fieldName={"statistics/defensive/total/saves"}
                     type={"number"}
                     initialValue={props.statistics.defensive.total.saves}
                   />
                   <Field
                     label={"Penalty Saves"}
-                    fieldName={"defensive/total/penaltySaves"}
+                    fieldName={"statistics/defensive/total/penaltySaves"}
                     type={"number"}
                     initialValue={props.statistics.defensive.total.penaltySaves}
                   />
                   <Field
                     label={"Clean Sheets"}
-                    fieldName={"defensive/total/cleanSheets"}
+                    fieldName={"statistics/defensive/total/cleanSheets"}
                     type={"number"}
                     initialValue={props.statistics.defensive.total.cleanSheets}
                   />

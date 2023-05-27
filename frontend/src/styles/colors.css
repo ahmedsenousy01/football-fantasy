@@ -43,6 +43,13 @@
   --error-message-solid-color: rgb(129, 6, 6);
 }
 
+.navbar {
+  background-color: var(--bg-color-main);
+}
+.navbar * {
+  background-color: inherit;
+}
+
 .App.light {
   /* BG */
   --bg-color-main: #ddd;
