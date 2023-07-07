@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "deploy": "cd frontend && npm run build && cd ../server && npm run build && npm start",
-    "dev": "npm run dev --prefix frontend & npm run dev --prefix server"
+    "postinstall": "cd frontend && npm i && cd ../server && npm i",
+    "start": "cd frontend && npm run build && cd ../server && npm run build && npm start"
   },
   "keywords": [],
   "author": "",
