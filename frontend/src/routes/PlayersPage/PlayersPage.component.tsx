@@ -78,7 +78,7 @@ const PlayersPage: FC<PlayersPageProps> = ({
           {props.players.map((player) => (
             <div
               key={player._id}
-              className="player-card-container col-xl-2 col-lg-3 col-md-4 col-6"
+              className="player-card-container col-lg-3 col-md-4 col-6"
             >
               <PlayerCard
                 isBought={props.isPlayerBought(player._id)}

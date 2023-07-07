@@ -6,85 +6,108 @@ import { RegisterPage } from "@/routes/RegisterPage";
 import { ProfilePage } from "@/routes/ProfilePage/index";
 import ProtectedRoute from "@/components/ProtectedRoute/ProtectedRoute.component";
 import { useAppDispatch } from "@/hooks/redux-hooks";
-import {
-  fetchUserDetails,
-  selectIsLoadingUserDetails,
-  selectUserDetails,
-} from "@/store/User/User.slice";
+import { fetchUserDetails, selectUserDetails } from "@/store/User/User.slice";
 import { useSelector } from "react-redux";
-import PageLoader from "@/components/PageLoader/PageLoader";
 import Dashboard from "@/routes/DashBoard/Dashboard";
 import { PlayersPage } from "@/routes/PlayersPage";
 import { PlayerPage } from "@/routes/PlayerPage";
 import TeamPage from "@/routes/TeamPage";
+import Leaderboard from "@/routes/Leaderboard/Leaderboard.component";
+import Page from "@/components/Page/Page.component";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: (
+      <Page>
+        <Home />
+      </Page>
+    ),
   },
   {
     path: "/login",
-    element: <LoginPage />,
+    element: (
+      <Page>
+        <LoginPage />
+      </Page>
+    ),
   },
   {
     path: "/register",
-    element: <RegisterPage />,
+    element: (
+      <Page>
+        <RegisterPage />
+      </Page>
+    ),
   },
   {
     path: "/profile",
     element: (
-      <ProtectedRoute role={"user"}>
-        <ProfilePage />
-      </ProtectedRoute>
+      <Page>
+        <ProtectedRoute role={"user"}>
+          <ProfilePage />
+        </ProtectedRoute>
+      </Page>
     ),
   },
   {
     path: "/dashboard",
     element: (
-      <ProtectedRoute role={"user"} redirectTo={"/login"}>
-        <Dashboard />
-      </ProtectedRoute>
+      <Page>
+        <ProtectedRoute role={"user"} redirectTo={"/login"}>
+          <Dashboard />
+        </ProtectedRoute>
+      </Page>
     ),
   },
   {
     path: "/players/:page",
     element: (
-      <ProtectedRoute role={"user"} redirectTo={"/login"}>
-        <PlayersPage />
-      </ProtectedRoute>
+      <Page>
+        <ProtectedRoute role={"user"} redirectTo={"/login"}>
+          <PlayersPage />
+        </ProtectedRoute>
+      </Page>
     ),
   },
   {
     path: "/player/:id",
     element: (
-      <ProtectedRoute role={"user"} redirectTo={"/login"}>
-        <PlayerPage />
-      </ProtectedRoute>
+      <Page>
+        <ProtectedRoute role={"user"} redirectTo={"/login"}>
+          <PlayerPage />
+        </ProtectedRoute>
+      </Page>
     ),
   },
   {
     path: "/team",
     element: (
-      <ProtectedRoute role={"user"} redirectTo={"/login"}>
-        <TeamPage />
-      </ProtectedRoute>
+      <Page>
+        <ProtectedRoute role={"user"} redirectTo={"/login"}>
+          <TeamPage />
+        </ProtectedRoute>
+      </Page>
     ),
   },
   {
     path: "/users",
     element: (
-      <ProtectedRoute role={"admin"}>
-        <></>
-      </ProtectedRoute>
+      <Page>
+        <ProtectedRoute role={"admin"}>
+          <></>
+        </ProtectedRoute>
+      </Page>
     ),
   },
   {
     path: "/leaderboard",
     element: (
-      <ProtectedRoute role={"user"} redirectTo={"/login"}>
-        <></>
-      </ProtectedRoute>
+      <Page>
+        <ProtectedRoute role={"user"} redirectTo={"/login"}>
+          <Leaderboard />
+        </ProtectedRoute>
+      </Page>
     ),
   },
 ]);
@@ -92,7 +115,6 @@ const router = createBrowserRouter([
 const Router: FC = () => {
   const dispatch = useAppDispatch();
   const userDetails = useSelector(selectUserDetails);
-  const isLoading = useSelector(selectIsLoadingUserDetails);
 
   useMemo(() => {
     if (userDetails === undefined) {
@@ -100,7 +122,7 @@ const Router: FC = () => {
     }
   }, []);
 
-  return isLoading ? <PageLoader /> : <RouterProvider router={router} />;
+  return <RouterProvider router={router} />;
 };
 
 export default Router;
